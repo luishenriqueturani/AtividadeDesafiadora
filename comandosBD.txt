@@ -1,0 +1,33 @@
+create database Atividade_Desafiadora;
+use Atividade_Desafiadora;
+
+create table fornecedor(
+	id int not null auto_increment primary key,
+    nome varchar(100) not null,
+    telefone varchar(30) not null,
+    emails varchar(50) not null,
+    rua varchar(20) not null,
+    num_end int not null,
+    cidade varchar(30) not null,
+    estado varchar(30) not null,
+    cep varchar(20) not null
+);
+
+create table produto(
+	cod int not null primary key,
+    marca varchar(30) not null,
+    modelo varchar(30) not null,
+    cor varchar(20) not null,
+    preco float(12,2) not null,
+    cod_fornecedor int,
+    data_fabricacao date not null,
+    data_cadastro date not null,
+    constraint FK_fornecedor foreign key(cod_fornecedor) references fornecedor(id)
+);
+
+insert into fornecedor values
+(default,"American Imports","51 999999999","contato@americanimport.com","Bartolomeu de Gusmão",1111,"Novo Hamburgo","RS","93542000");
+
+insert into produto values
+(888,'Asus','Max Shot','preto',1000,2,'2018-10-01','2021-03-04'),
+(999,'Asus','Rog Phone','preto',8000,2,'2020-10-01','2021-03-04');
