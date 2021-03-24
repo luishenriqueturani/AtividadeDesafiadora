@@ -1,19 +1,20 @@
 <?php
-require_once 'CRUD.php';
-$cod = $_GET["cod"];
+require_once 'CRUD.php';//instância do CRUD
+$cod = $_GET["cod"];//pelo get vem o cod que é atribuido a uma variável
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <?php
-        echo '<title>Deletar o produto ' . pesquisaPorCod($cod)[2] . '</title>';
+        echo '<title>Deletar o produto ' . pesquisaPorCod($cod)[2] . '</title>';//o title é criado, recebendo pela função o nome do produto
         ?>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         
     </head>
     <body>
+        <!-- começa o navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -26,17 +27,20 @@ $cod = $_GET["cod"];
                     <li class="nav-item">
                         <a class="nav-link" href="cadastrarFornecedor.php">Cadastro de Fornecedor</a>
                     </li>
-
                 </ul>
             </div>
         </nav>
+        <!-- termina o navbar -->
         <div class="container">
             <h3>Dados do Produto</h3>
             <div class="row">
                 <div class="col-lg">
+                    <!-- inicia aqui o formulário -->
                     <form action="Deletor.php" method="POST">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><input id="inputCod" name="inputCod"> </li>
+                            <!-- as informações do produto são listadas -->
+                            <li class="list-group-item"><input id="inputCod" name="inputCod"> </li><!-- o cod será necessário, então vem em input, ainda não achei uma forma de não poder mudar ele -->
+                            <small>Não modifique o código, senão dará erro ou pode até apagar um registro errado!</small>
                             <li class="list-group-item">Marca: <?php echo pesquisaPorCod($cod)[1]; ?></li>
                             <li class="list-group-item">Modelo: <?php echo pesquisaPorCod($cod)[2]; ?></li>
                             <li class="list-group-item">Cor: <?php echo pesquisaPorCod($cod)[3]; ?></li>
@@ -44,7 +48,7 @@ $cod = $_GET["cod"];
                             <li class="list-group-item">Data de Fabricação: <?php echo pesquisaPorCod($cod)[5]; ?></li>
                             <li class="list-group-item">Data de Cadastro: <?php echo pesquisaPorCod($cod)[6]; ?></li>
                             <li class="list-group-item">Fornecedor: <?php echo pesquisaPorCod($cod)[7]; ?></li>
-                        </ul>
+                        </ul><!-- termina a listagem do produto -->
 
 
                         <!-- Botão de Deletar -->
@@ -57,22 +61,22 @@ $cod = $_GET["cod"];
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Confirmar a Exclusão do Registro</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <h5 class="modal-title" id="exampleModalLabel">Confirmar a Exclusão do Registro</h5><!-- título -->
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><!-- botão de fechar -->
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Tem Certeza que quer deletar este Registro?
+                                        Tem Certeza que quer deletar este Registro?<!-- corpo de texto -->
                                     </div>
-                                    <div class="modal-footer">
+                                    <div class="modal-footer"><!-- área inferior, o rodapé com os botões -->
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Manter</button>
                                         <button type="submit" class="btn btn-primary" name="deleta-dados">Deletar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <!-- termina o modal -->
 
 
                     </form>
@@ -86,6 +90,7 @@ $cod = $_GET["cod"];
 
         </div>   
         <script>
+            //código para adicionar o valor ao inputCod
             document.getElementById('inputCod').value = `<?php echo pesquisaPorCod($cod)[0] ?>`
         </script>
 

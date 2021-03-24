@@ -1,5 +1,5 @@
 <?php
-require_once 'CRUD.php';
+require_once 'CRUD.php';//chama o Objeto CRUD, para ser possível usar suas funções
 //pesquisaPorCod($cod);
 ?>
 <!DOCTYPE html>
@@ -7,14 +7,15 @@ require_once 'CRUD.php';
     <head>
         <meta charset="UTF-8">
         <?php
-        echo '<title>Alteração de dados do produto ' . pesquisaPorCod($_GET["cod"])[2] . '</title>';
-        ?>
+        echo '<title>Alteração de dados do produto ' . pesquisaPorCod($_GET["cod"])[2] . '</title>';//com o echo é criado o title, recebendo um código via get, no CRUD é feito um pesquisa pelo
+        ?>                                                                          <!--cod, retornando um array, que na posição 2 vem o nome do produto, sendo posto no title da página
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 
     </head>
     <body>
+        <!-- Começa a navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -31,12 +32,13 @@ require_once 'CRUD.php';
                 </ul>
             </div>
         </nav>
+        <!-- termina a navbar -->
         <div class="container">
             <h3>Dados do Produto</h3>
             <div class="row">
                 <div class="col-lg">
                     <!-- Form da marca -->
-                    <form action="alterardados.php" method="POST">
+                    <form action="alterardados.php" method="POST"><!-- o form é enviado para a própria página, por post -->
                         <div class="form-group">
                             <label for="marca"><?php echo pesquisaPorCod($_GET["cod"])[1]; ?></label>
                             <input type="text" class="form-control" id="marca" name="input-marca" placeholder="Digite a nova marca...">

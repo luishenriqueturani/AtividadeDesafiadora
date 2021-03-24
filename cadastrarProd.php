@@ -75,9 +75,9 @@
                     echo '<label for="select-fornecedor">Fornecedor*</label>';                  //cria um select para escolher o fornecedor, escolhi fazer isso por php para que o tempo de carregamento seja o mesmo do conteúdo
                     echo '<select class="form-control" id="select-fornecedor"  name="select-fornecedor" required=""><option>Escolha o fornecedor</option>';
                     try {
-                        require_once 'CRUD.php';
-                        echo selecionaFornecedor();
-                    } catch (PDOException $ex) {
+                        require_once 'CRUD.php';//instancia o método crud
+                        echo selecionaFornecedor();//é chamado um método do CRUD, criando a seleção dos fornecedores
+                    } catch (PDOException $ex) {//caso de erro mostra um alert
                         echo "<script>alert($ex);</script>";
                     }
                     echo '</select>';
@@ -93,18 +93,18 @@
             
             <?php
             if (isset($_REQUEST['cadastrarProdutos'])) {
-                try {
-                    $cod = isset($_REQUEST['inputCod']) ? $_REQUEST['inputCod'] : null;                      
-                    $marca = isset($_REQUEST['inputMarca']) ? $_REQUEST['inputMarca']: null;
+                try {//se o botão for precionado...
+                    $cod = isset($_REQUEST['inputCod']) ? $_REQUEST['inputCod'] : null;            //o valor dos campos é atribuido às variáveis, mas se o campo estiver vazio          
+                    $marca = isset($_REQUEST['inputMarca']) ? $_REQUEST['inputMarca']: null;        //é atribuído o valor de null
                     $modelo = isset($_REQUEST['inputModelo']) ? $_REQUEST['inputModelo']: null;
                     $cor = isset($_REQUEST['inputCor']) ? $_REQUEST['inputCor']: null;
                     $preco = isset($_REQUEST['inputPreco']) ? $_REQUEST['inputPreco']: null;
                     $data = isset($_REQUEST['inputData']) ? $_REQUEST['inputData']: null;
                     $fornecedor = isset($_REQUEST['select-fornecedor']) ? $_REQUEST['select-fornecedor']: null;
-                    $dataAtual = date("y-m-d");
+                    $dataAtual = date("y-m-d"); //a data atual é pega do sistema
                     if(empty($cod) || empty($marca) || empty($modelo) || empty($cor) || empty($preco) || empty($data) || empty($fornecedor)){
-                        echo "Por favos, preencha todos os campos!";
-                    } else {
+                        echo "Por favos, preencha todos os campos!";//se algum dos campos estiver como null, mostra mensagem para que seja tudo preenchido
+                    } else {//se tudo estiver ok, chama função para cadastrar, passando por parâmetro as variáveis
                         cadastrarProduto($cod, $marca, $modelo, $cor, $preco, $fornecedor, $data, $dataAtual);
                     }
                     

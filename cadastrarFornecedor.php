@@ -33,7 +33,7 @@
         <div class="container">
             <!-- 
                 Começa o formulário, atua nesta mesma página
-                Usa o método POST para maior segurança
+                Usa o método POST
             -->
             <form action="cadastrarFornecedor.php" method="POST" name="cad-fornecedor">
                 <!-- formulário do fronecedor -->
@@ -93,20 +93,20 @@
                 try {
                     require_once 'CRUD.php';
                     $nome = isset($_REQUEST['nome']) ? $_REQUEST['nome']: null;                      //os valores de cada campo é adicionado em uma variável
-                    $email = isset($_REQUEST['email']) ? $_REQUEST['email']: null;
+                    $email = isset($_REQUEST['email']) ? $_REQUEST['email']: null;                   //caso o campo esteja em branco, recebe automaticamente o valor de null
                     $telefone = isset($_REQUEST['telefone']) ? $_REQUEST['telefone']: null;
                     $rua = isset($_REQUEST['rua']) ? $_REQUEST['rua']: null;
                     $numero = isset($_REQUEST['num']) ? $_REQUEST['num']: null;
                     $cidade = isset($_REQUEST['cidade']) ? $_REQUEST['cidade']: null;
                     $estado = isset($_REQUEST['estado']) ? $_REQUEST['estado']: null;
                     $cep = isset($_REQUEST['cep']) ? $_REQUEST['cep']: null;
-                    
+                    //se um dos campos for null, vem um alert com uma mensagem para que seja tudo preenchido, senão...
                     if(empty($nome) || empty($email) || empty($telefone) || empty($rua) || empty($numero) || empty($cidade) || empty($estado) || empty($cep)){
                         echo '<script>alert(Por favor, preencha todos os campos!);</script>';
-                    }else{
+                    }else{//... É chamado a função de cadastro de dados, recebendo as variáveis de parâmetros
                         cadastrarFornecedor($nome, $telefone, $email, $rua, $numero, $cidade, $estado, $cep);
                     }
-                } catch (Exception $ex) {
+                } catch (Exception $ex) {//caso dê erro, é feito um alert com a mensagem de erro
                     echo '<script>alert('.$ex.');</script>';
                 }
             }

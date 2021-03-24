@@ -12,6 +12,7 @@
     </head>
 
     <body>
+        <!-- começa a navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -24,10 +25,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="cadastrarFornecedor.php">Cadastro de Fornecedor</a>
                     </li>
-
                 </ul>
             </div>
         </nav>
+        <!-- termina a navbar -->
         <div class="container">
 
             <h3>Lista de Produtos</h3>
@@ -45,12 +46,11 @@
                 </thead>
                 <tbody>
                     <?php
-                    require_once 'CRUD.php';
-                    try {
-                        echo "".buscarRegistrosTabela();
-                        exit;
+                    require_once 'CRUD.php';//instancia o CRUD
+                    try {//try catch para tratar um pocível erro
+                        echo "".buscarRegistrosTabela();//chama a função para imprimir uma tabela, 
                     } catch (Exception $ex) {
-                        echo '<script>alert('.$ex.');</script>';
+                        echo '<script>alert('.$ex.');</script>';//caso dê erro, mostra um alert com o  erro
                     }
                     
                     ?>
