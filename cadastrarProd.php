@@ -77,7 +77,7 @@
                     try {
                         require_once 'CRUD.php';
                         echo selecionaFornecedor();
-                    } catch (Exception $ex) {
+                    } catch (PDOException $ex) {
                         echo "<script>alert($ex);</script>";
                     }
                     echo '</select>';
@@ -94,7 +94,6 @@
             <?php
             if (isset($_REQUEST['cadastrarProdutos'])) {
                 try {
-                    require_once 'CRUD.php';
                     $cod = isset($_REQUEST['inputCod']) ? $_REQUEST['inputCod'] : null;                      
                     $marca = isset($_REQUEST['inputMarca']) ? $_REQUEST['inputMarca']: null;
                     $modelo = isset($_REQUEST['inputModelo']) ? $_REQUEST['inputModelo']: null;
@@ -109,7 +108,7 @@
                         cadastrarProduto($cod, $marca, $modelo, $cor, $preco, $fornecedor, $data, $dataAtual);
                     }
                     
-                } catch (Exception $ex) {
+                } catch (PDOException $ex) {
                     echo 'Erro ao canectar: ' . $ex; //informando o erro
                 }
             }

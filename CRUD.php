@@ -18,14 +18,12 @@ function cadastrarProduto($cod, $marca, $modelo, $cor, $preco, $fornecedor, $dat
     $stmt = conectar()->prepare('INSERT INTO produto VALUES '                        //depois de muitas tentativas, funcionou
             . '(' . $cod . ',"' . $marca . '","' . $modelo . '","' . $cor . '","' . $preco . '",' . $fornecedor . ',"' . $data . '","' . $dataAtual . '");');
     $stmt->execute();
-    exit;
 }
 
 function cadastrarFornecedor($nome, $telefone, $email, $rua, $numero, $cidade, $estado, $cep) {
     $stmt = conectar()->prepare("INSERT INTO fornecedor(id,nome,telefone,emails,rua,num_end,cidade,estado,cep) "
             . "VALUES (default,'$nome','$telefone','$email','$rua','$numero','$cidade','$estado','$cep'); ");
     $stmt->execute();
-    exit;
 }
 
 function buscarRegistrosTabela() {
@@ -57,6 +55,16 @@ function pesquisaPorCod($cod){
     }
     
     return $retorno;
+}
+
+function deletarRegistro($cod){
+    $stmt = conectar()->prepare("DELETE FROM produto WHERE cod = ? ;");
+    $stmt->bindParam(1, $cod, PDO::PARAM_INT);
+    if($stmt->execute()){
+        echo 'Registro excluido com sucesso!';
+    }else{
+        throw new PDOException("Erro!");
+    }
 }
 
 ?>
