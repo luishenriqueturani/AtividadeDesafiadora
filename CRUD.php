@@ -68,4 +68,17 @@ function deletarRegistro($cod) {
     }
 }
 
+function alterarCadastro($campo, $cod, $novoDado){
+    $stmt = conectar()->prepare('UPDATE produto SET ? = " ? " WHERE cod = ? ;');
+    $stmt->bindParam(1, $campo, PDO::PARAM_STR);
+    $stmt->bindParam(2, $novoDado, PDO::PARAM_STR);
+    $stmt->bindParam(3, $cod, PDO::PARAM_INT);
+    if(!$stmt->execute()){
+        echo "Não foi possível alterar o dado!";
+    }else{
+        sleep(5);
+        header("Location: index.php");
+    }
+}
+
 ?>

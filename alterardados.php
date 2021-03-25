@@ -1,13 +1,13 @@
 <?php
-require_once 'CRUD.php';//chama o Objeto CRUD, para ser possível usar suas funções
-//pesquisaPorCod($cod);
+require_once 'CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
+$cod = $_REQUEST["cod"];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <?php
-        echo '<title>Alteração de dados do produto ' . pesquisaPorCod($_GET["cod"])[2] . '</title>';//com o echo é criado o title, recebendo um código via get, no CRUD é feito um pesquisa pelo
+        echo '<title>Alteração de dados do produto ' . pesquisaPorCod($cod)[2] . '</title>'; //com o echo é criado o title, recebendo um código via get, no CRUD é feito um pesquisa pelo
         ?>                                                                          <!--cod, retornando um array, que na posição 2 vem o nome do produto, sendo posto no title da página
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -38,58 +38,47 @@ require_once 'CRUD.php';//chama o Objeto CRUD, para ser possível usar suas fun�
             <div class="row">
                 <div class="col-lg">
                     <!-- Form da marca -->
-                    <form action="alterardados.php" method="POST"><!-- o form é enviado para a própria página, por post -->
+                    <form action="Alterador.php" method="POST"><!-- o form é enviado para a página Alterador por post -->
+                        <input type="hidden" name="cod" value="<?php echo "$cod"; ?>">
                         <div class="form-group">
-                            <label for="marca"><?php echo pesquisaPorCod($_GET["cod"])[1]; ?></label>
+                            <label for="marca"><?php echo pesquisaPorCod($cod)[1]; ?></label>
                             <input type="text" class="form-control" id="marca" name="input-marca" placeholder="Digite a nova marca...">
                             <button type="submit" name="alterar-marca" class="btn btn-primary">Alterar</button>
                         </div>
-                    </form>
-                    <!-- Form do Modelo -->
-                    <form action="alterardados.php" method="POST">
+                        <!-- Form do Modelo -->
                         <div class="form-group">
-                            <label for="modelo"><?php echo pesquisaPorCod($_GET["cod"])[2]; ?></label>
+                            <label for="modelo"><?php echo pesquisaPorCod($cod)[2]; ?></label>
                             <input type="text" class="form-control" id="modelo" name="input-modelo" placeholder="Digite o novo modelo...">
                             <button type="submit" name="altera-modelo" class="btn btn-primary">Alterar</button>
                         </div>
-                    </form>
-                    <!-- Form da cor -->
-                    <form action="alterardados.php" method="POST">
+                        <!-- Form da cor -->
                         <div class="form-group">
-                            <label for="cor"><?php echo pesquisaPorCod($_GET["cod"])[3]; ?></label>
+                            <label for="cor"><?php echo pesquisaPorCod($cod)[3]; ?></label>
                             <input type="text" class="form-control" id="cor" name="input-cor" placeholder="Digite a nova cor...">
                             <button type="submit" name="altera-cor" class="btn btn-primary">Alterar</button>
                         </div>
-                    </form>
-                    <!-- Form do preço -->
-                    <form action="alterardados.php" method="POST">
+                        <!-- Form do preço -->
                         <div class="form-group">
-                            <label for="preco">R$ <?php echo pesquisaPorCod($_GET["cod"])[4]; ?></label>
+                            <label for="preco">R$ <?php echo pesquisaPorCod($cod)[4]; ?></label>
                             <input type="number" class="form-control" id="preco" name="input-preco" placeholder="Digite o novo preço..." min="0" max="999999">
                             <button type="submit" name="altera-preco" class="btn btn-primary">Alterar</button>
                         </div>
-                    </form>
-                    <!-- Form da data de fabricação -->
-                    <form action="alterardados.php" method="POST">
+                        <!-- Form da data de fabricação -->
                         <div class="form-group">
-                            <label for="data-fab">Data de fabricação: <?php echo pesquisaPorCod($_GET["cod"])[5]; ?></label>
+                            <label for="data-fab">Data de fabricação: <?php echo pesquisaPorCod($cod)[5]; ?></label>
                             <input type="date" class="form-control" id="data-fab" name="input-data-fab">
                             <button type="submit" name="altera-data-fab" class="btn btn-primary">Alterar</button>
                         </div>
-                    </form>
-                    <!-- Form de Cadastro -->
-                    <form action="alterardados.php" method="POST">
+                        <!-- Form de Cadastro -->
                         <div class="form-group">
-                            <label for="data-cad">Data de Cadastro: <?php echo pesquisaPorCod($_GET["cod"])[6]; ?></label>
+                            <label for="data-cad">Data de Cadastro: <?php echo pesquisaPorCod($cod)[6]; ?></label>
                             <input type="date" class="form-control" id="data-cad" name="input-data-cad">
                             <button type="submit" name="altera-data-cad" class="btn btn-primary">Alterar</button>
                         </div>
-                    </form>
-                    <!-- Form do fornecedor-->
-                    <form action="alterardados.php" method="POST">
+                        <!-- Form do fornecedor-->
                         <div class="form-group">
                             <?php
-                            echo '<label for="select-fornecedor">Fornecedor: '.pesquisaPorCod($_GET["cod"])[7].'</label>';                  //cria um select para escolher o fornecedor, escolhi fazer isso por php para que o tempo de carregamento seja o mesmo do conteúdo
+                            echo '<label for="select-fornecedor">Fornecedor: ' . pesquisaPorCod($cod)[7] . '</label>';                  //cria um select para escolher o fornecedor, escolhi fazer isso por php para que o tempo de carregamento seja o mesmo do conteúdo
                             echo '<select class="form-control" id="select-fornecedor"  name="select-fornecedor" required=""><option>Escolha o fornecedor</option>';
                             try {
                                 require_once 'CRUD.php';
@@ -105,8 +94,7 @@ require_once 'CRUD.php';//chama o Objeto CRUD, para ser possível usar suas fun�
 
 
 
-                    <?php
-                    ?>
+                    
                 </div>
             </div>
 
