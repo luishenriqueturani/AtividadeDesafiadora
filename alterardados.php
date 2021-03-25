@@ -1,6 +1,6 @@
 <?php
 require_once 'CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
-$cod = $_REQUEST["cod"];
+$cod = $_REQUEST["cod"]; //atribui o cod enviado por get a uma variável, para ser usado na página
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -37,43 +37,37 @@ $cod = $_REQUEST["cod"];
             <h3>Dados do Produto</h3>
             <div class="row">
                 <div class="col-lg">
-                    <!-- Form da marca -->
-                    <form action="Alterador.php" method="POST"><!-- o form é enviado para a página Alterador por post -->
+                    
+                    <form name="alterarVariosDados" action="Alterador.php" method="POST">
                         <input type="hidden" name="cod" value="<?php echo "$cod"; ?>">
                         <div class="form-group">
                             <label for="marca"><?php echo pesquisaPorCod($cod)[1]; ?></label>
-                            <input type="text" class="form-control" id="marca" name="input-marca" placeholder="Digite a nova marca...">
-                            <button type="submit" name="alterar-marca" class="btn btn-primary">Alterar</button>
+                            <input type="text" class="form-control" id="marca" name="inputMarca" placeholder="Digite a nova marca...">
                         </div>
                         <!-- Form do Modelo -->
                         <div class="form-group">
                             <label for="modelo"><?php echo pesquisaPorCod($cod)[2]; ?></label>
-                            <input type="text" class="form-control" id="modelo" name="input-modelo" placeholder="Digite o novo modelo...">
-                            <button type="submit" name="altera-modelo" class="btn btn-primary">Alterar</button>
+                            <input type="text" class="form-control" id="modelo" name="inputModelo" placeholder="Digite o novo modelo...">
                         </div>
                         <!-- Form da cor -->
                         <div class="form-group">
                             <label for="cor"><?php echo pesquisaPorCod($cod)[3]; ?></label>
-                            <input type="text" class="form-control" id="cor" name="input-cor" placeholder="Digite a nova cor...">
-                            <button type="submit" name="altera-cor" class="btn btn-primary">Alterar</button>
+                            <input type="text" class="form-control" id="cor" name="inputCor" placeholder="Digite a nova cor...">
                         </div>
                         <!-- Form do preço -->
                         <div class="form-group">
                             <label for="preco">R$ <?php echo pesquisaPorCod($cod)[4]; ?></label>
-                            <input type="number" class="form-control" id="preco" name="input-preco" placeholder="Digite o novo preço..." min="0" max="999999">
-                            <button type="submit" name="altera-preco" class="btn btn-primary">Alterar</button>
+                            <input type="number" class="form-control" id="preco" name="inputPreco" placeholder="Digite o novo preço..." min="0" max="999999">
                         </div>
                         <!-- Form da data de fabricação -->
                         <div class="form-group">
                             <label for="data-fab">Data de fabricação: <?php echo pesquisaPorCod($cod)[5]; ?></label>
                             <input type="date" class="form-control" id="data-fab" name="input-data-fab">
-                            <button type="submit" name="altera-data-fab" class="btn btn-primary">Alterar</button>
                         </div>
                         <!-- Form de Cadastro -->
                         <div class="form-group">
                             <label for="data-cad">Data de Cadastro: <?php echo pesquisaPorCod($cod)[6]; ?></label>
                             <input type="date" class="form-control" id="data-cad" name="input-data-cad">
-                            <button type="submit" name="altera-data-cad" class="btn btn-primary">Alterar</button>
                         </div>
                         <!-- Form do fornecedor-->
                         <div class="form-group">
@@ -81,20 +75,18 @@ $cod = $_REQUEST["cod"];
                             echo '<label for="select-fornecedor">Fornecedor: ' . pesquisaPorCod($cod)[7] . '</label>';                  //cria um select para escolher o fornecedor, escolhi fazer isso por php para que o tempo de carregamento seja o mesmo do conteúdo
                             echo '<select class="form-control" id="select-fornecedor"  name="select-fornecedor" required=""><option>Escolha o fornecedor</option>';
                             try {
-                                require_once 'CRUD.php';
-                                echo selecionaFornecedor();
+                                echo selecionaFornecedor();//chama uma função que cria os options pesquisando os fornecedores no bd
                             } catch (Exception $ex) {
                                 echo "<script>alert($ex);</script>";
                             }
                             echo '</select>';
                             ?>
-                            <button type="submit" name="altera-fornecedor" class="btn btn-primary">Alterar</button>
                         </div>
+                        <button type="submit" name="alterar" class="btn btn-primary">Alterar</button><!-- botão para chamar a função de alterar dados -->
                     </form>
 
 
 
-                    
                 </div>
             </div>
 

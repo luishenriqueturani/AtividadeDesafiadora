@@ -39,7 +39,7 @@ $cod = $_GET["cod"];//pelo get vem o cod que é atribuido a uma variável
                     <form action="Deletor.php" method="POST">
                         <ul class="list-group list-group-flush">
                             <!-- as informações do produto são listadas -->
-                            <li class="list-group-item"><input type="hidden" id="inputCod" name="inputCod"> </li><!-- o cod será necessário, então vem em input, ainda não achei uma forma de não poder mudar ele -->
+                            <li class="list-group-item"><input type="hidden" id="inputCod" name="inputCod"> </li><!-- o cod será necessário, então vem em input -->
                             <small>Não modifique o código, senão dará erro ou pode até apagar um registro errado!</small>
                             <li class="list-group-item">Marca: <?php echo pesquisaPorCod($cod)[1]; ?></li>
                             <li class="list-group-item">Modelo: <?php echo pesquisaPorCod($cod)[2]; ?></li>

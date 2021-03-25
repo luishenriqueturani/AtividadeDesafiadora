@@ -61,20 +61,18 @@ function deletarRegistro($cod) {
     $stmt = conectar()->prepare("DELETE FROM produto WHERE cod = ? ;");//$stmt recebe o comando com a conexão e a preparação da query, no local do valor de referência de pesquisa vem apenas um ?
     $stmt->bindParam(1, $cod, PDO::PARAM_INT);//o comando bindParam recebe um índice para buscar o ?, o valor que ele põe no lugar
     if ($stmt->execute()) {//se o comando foi executado executa os códigos, senão...
-        sleep(10);
+        sleep(5);
         header("Location: index.php");
     } else {//... executa o um código que lança uma mensagem com as informações do erro
         throw new PDOException("Erro!");
     }
 }
 
-function alterarCadastro($campo, $cod, $novoDado){
-    $stmt = conectar()->prepare('UPDATE produto SET ? = " ? " WHERE cod = ? ;');
-    $stmt->bindParam(1, $campo, PDO::PARAM_STR);
-    $stmt->bindParam(2, $novoDado, PDO::PARAM_STR);
-    $stmt->bindParam(3, $cod, PDO::PARAM_INT);
+function alterarCadastro($query){
+    $stmt = conectar()->prepare($query);
+    
     if(!$stmt->execute()){
-        echo "Não foi possível alterar o dado!";
+        throw new PDOException("Erro!");
     }else{
         sleep(5);
         header("Location: index.php");
