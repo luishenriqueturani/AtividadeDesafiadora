@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,6 +31,24 @@
         <div class="container">
 
             <h3>Lista de Produtos</h3>
+            <form action="index.php" method="POST">
+                <div class="form-row">
+                    <div class="form-group col-md-08">
+                        <input type="text" class="form-control" id="InputPesquisa" name="inputPesquisa" placeholder="Digite para realizar a pesqisa...">
+                    </div>
+                    <div class="form-group col-md-04">
+                        <select id="selectTipoPesquisa" name="selectTipoPesquisa" class="form-control">
+                            <option selected="" value="cod">Código</option>
+                            <option value="fornecedor">Fornecedor</option>
+                            <option value="preco">Preço</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-02">
+                        <button class="btn btn-primary" type="submit" id="btnPesquisar" name="btnPesquisar">Pesquisar</button>
+                    </div>
+                </div>
+                <small>Escolha o tipo de pesquisa antes de pesquisar.</small>
+            </form>
             <table class="table">  <!-- A tabela é para mostrar os registros -->
                 <thead>
                     <tr>
@@ -46,13 +63,26 @@
                 </thead>
                 <tbody>
                     <?php
-                    require_once 'CRUD.php';//instancia o CRUD
-                    try {//try catch para tratar um pocível erro
-                        echo "".buscarRegistrosTabela();//chama a função para imprimir uma tabela, 
-                    } catch (Exception $ex) {
-                        echo '<script>alert('.$ex.');</script>';//caso dê erro, mostra um alert com o  erro
+                    require_once 'CRUD.php'; //instancia o CRUD
+
+
+
+
+                    if (isset($_POST["btnPesquisar"])) {
+                        $pesquisa = isset($_POST["inputPesquisa"]) ? $_POST["inputPesquisa"] : null;
+                        $campo = $_POST["selectTipoPesquisa"];
+                        if ($pesquisa == null) {
+                            echo "Por favor, digite o que deseja pesquisar!";
+                        } else {
+                            echo "" . pesquisarCampos($pesquisa, $campo);
+                        }
+                    } else {
+                        try {//try catch para tratar um pocível erro
+                            echo "" . buscarRegistrosTabela(); //chama a função para imprimir uma tabela, 
+                        } catch (Exception $ex) {
+                            echo '<script>alert(' . $ex . ');</script>'; //caso dê erro, mostra um alert com o  erro
+                        }
                     }
-                    
                     ?>
                 </tbody>
             </table>
