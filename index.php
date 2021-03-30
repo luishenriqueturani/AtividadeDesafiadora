@@ -68,13 +68,13 @@
 
 
 
-                    if (isset($_POST["btnPesquisar"])) {
-                        $pesquisa = isset($_POST["inputPesquisa"]) ? $_POST["inputPesquisa"] : null;
-                        $campo = $_POST["selectTipoPesquisa"];
-                        if ($pesquisa == null) {
+                    if (isset($_POST["btnPesquisar"])) { //se o botão foi precionado é executado o código, senão....
+                        $pesquisa = isset($_POST["inputPesquisa"]) ? $_POST["inputPesquisa"] : null;//se foi digitado algo o valor é atribuido a variável, senão ela fica nula
+                        $campo = $_POST["selectTipoPesquisa"];//como o usuário não precisa digitar nada, e o valor é controlado pelo select, apenas é adicionado o valor a variável
+                        if ($pesquisa == null) {//se o valor a ser pesquisado for nulo é mostrado uma mensagem ao usuário, senão...
                             echo "Por favor, digite o que deseja pesquisar!";
                         } else {
-                            echo "" . pesquisarCampos($pesquisa, $campo);
+                            echo "" . pesquisarCampos($pesquisa, $campo);//é chamado uma função tendo os parâmetros passados
                         }
                     } else {
                         try {//try catch para tratar um pocível erro

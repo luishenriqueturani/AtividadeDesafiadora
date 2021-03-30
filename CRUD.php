@@ -61,29 +61,29 @@ function deletarRegistro($cod) {
     $stmt = conectar()->prepare("DELETE FROM produto WHERE cod = ? ;"); //$stmt recebe o comando com a conexão e a preparação da query, no local do valor de referência de pesquisa vem apenas um ?
     $stmt->bindParam(1, $cod, PDO::PARAM_INT); //o comando bindParam recebe um índice para buscar o ?, o valor que ele põe no lugar
     if ($stmt->execute()) {//se o comando foi executado executa os códigos, senão...
-        sleep(5);
-        header("Location: index.php");
+        sleep(5);//esse tempo é apenas para eu ter serteza de que caiu aqui
+        header("Location: index.php");//o usuário é enviádo para a tela inicial após os 5 segundos
     } else {//... executa o um código que lança uma mensagem com as informações do erro
         throw new PDOException("Erro!");
     }
 }
 
 function alterarCadastro($query) {
-    $stmt = conectar()->prepare($query);
+    $stmt = conectar()->prepare($query);//a query já vem pronta pelo parâmetro, então é só conectar e usar ela
 
-    if (!$stmt->execute()) {
+    if (!$stmt->execute()) {//se não for possível executar ela, é lançado a mensagem de erro
         throw new PDOException("Erro!");
-    } else {
-        sleep(5);
+    } else {//senão o usuário é enviádo para a tela inicial após 5 segundos
+        sleep(5);//esse tempo é apenas para eu ter serteza de que caiu aqui
         header("Location: index.php");
     }
 }
 
 function pesquisarCampos($pesquisa, $campo) {
-    if ($campo == "cod") {
-        $retorno = "";
+    if ($campo == "cod") {//os if e elseif verificam o campo a ser pesquisado
+        $retorno = "";//variável vasia que irá receber o resultado da pesquisa
 
-        if (is_numeric($pesquisa)) {
+        if (is_numeric($pesquisa)) {//esse if testa a variável para verificar se é uma string com apenas valores numéricos
 
             $stmt = conectar()->prepare("SELECT p.cod, p.marca, p.modelo, p.cor, p.preco, p.cod_fornecedor, f.nome FROM produto as p, fornecedor as f WHERE p.cod = $pesquisa and p.cod_fornecedor = f.id;");
             //a variável $stmt, stantment, recebe a query, com a classe PDO recebendo o preparando a execução
@@ -94,15 +94,15 @@ function pesquisarCampos($pesquisa, $campo) {
                         $registro["cor"] . "</td><td>" . $registro["preco"] . "</td><td>" . $registro["nome"] . '</td><td><a href="alterardados.php?cod=' . $registro["cod"]
                         . '">Alterar Dados</a> - <a href="excluir.php?cod=' . $registro["cod"] . '">Excluir</a></td></tr>';
             }
-        } else {
+        } else {//se a variável possui letras, a variável que retorna recebe uma mensagem, informando o erro da pesquisa
             $retorno = "Por Favor, digite apenas números para pesquisar por código!";
         }
         return $retorno;
     } elseif ($campo == "fornecedor") {
-        $retorno = "";
+        $retorno = "";//variável vasia que irá receber o resultado da pesquisa
 
-        if (is_numeric($pesquisa)) {
-            $retorno = "Pesquisa inválida! Não digite apenas números para pesquisar por um Fornecedor";
+        if (is_numeric($pesquisa)) {//aqui o teste é inverso ao anterior, aqui é desejado uma variável tipo string mas que não tenha apenas números
+            $retorno = "Pesquisa inválida! Não digite apenas números para pesquisar por um Fornecedor";//então, se tiver apenas números é retornado a mensagem de erro
         } else {
             $stmt = conectar()->prepare("SELECT p.cod, p.marca, p.modelo, p.cor, p.preco, p.cod_fornecedor, f.nome FROM produto as p, fornecedor as f WHERE f.nome = '$pesquisa' and p.cod_fornecedor = f.id;");
             //a variável $stmt, stantment, recebe a query, com a classe PDO recebendo o preparando a execução
@@ -116,10 +116,9 @@ function pesquisarCampos($pesquisa, $campo) {
         }
         return $retorno;
     } elseif ($campo == "preco") {
-        $retorno = "";
+        $retorno = "";//variável vasia que irá receber o resultado da pesquisa
 
-        if (is_numeric($pesquisa)) {
-
+        if (is_numeric($pesquisa)) {//aqui é como o primeiro caso, é desejado uma variável string apenas com números
             $stmt = conectar()->prepare("SELECT p.cod, p.marca, p.modelo, p.cor, p.preco, p.cod_fornecedor, f.nome FROM produto as p, fornecedor as f WHERE p.preco = $pesquisa and p.cod_fornecedor = f.id;");
             //a variável $stmt, stantment, recebe a query, com a classe PDO recebendo o preparando a execução
             $stmt->execute(); //$stmt executa a query usando de uma função da classe PDO
@@ -130,8 +129,8 @@ function pesquisarCampos($pesquisa, $campo) {
                         . '">Alterar Dados</a> - <a href="excluir.php?cod=' . $registro["cod"] . '">Excluir</a></td></tr>';
             }
         } else {
-            $retorno = "Por Favor, digite apenas números para pesquisar por preço!";
-        }
+            $retorno = "Por Favor, digite apenas números para pesquisar por preço, e verifique se usou o ponto e não a vírgula!";//então se tiver letras, se não for apenas números
+        }//é mostrado a mensagem, como também se usar a vírgula, precisa ser o ponto
         return $retorno;
     }
 }
