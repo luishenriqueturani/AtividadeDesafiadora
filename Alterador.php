@@ -15,270 +15,32 @@ try {
     if($fornecedor == "Escolha o fornecedor"){                                                      //assim há esta comparação, para o caso de ter este valor
         $fornecedor = null;                                                                         //ser atribuido o valor de null, impedindo um grande bug
     }
-
-    if ($marca != null) {                                                               //aqui vem o trabalho de uma tarde inteira, os ifelse fazem uma série de comparações
-        $query .= 'marca = "' . $marca . '"';                                           //para ver se os campos, e determinados campos, foram preenchidos
-        if ($modelo != null) {                                                          //fazendo então concatenações da query, para no final entregar uma query toda pronta, 
-            $query .= ', modelo = "' . $modelo . '"';                                   //cuidando das vírgulas inclusive. Tudo isso para usar um único botão para o formulário
-            if ($cor != null) {                                                         //mas o incrível é que funcionou com menos testes do que usando um botão para campo
-                $query .= ', cor = "' . $cor . '"';
-                if ($preco != null) {
-                    $query .= ', preco = ' . $preco;
-                    if ($dataFab != null) {
-                        $query .= ', data_fabricacao = "' . $dataFab . '"';
-                        if ($dataCad != null) {
-                            $query .= ', data_cadastro = "' . $dataCad . '"';
-                            if ($fornecedor != null) {
-                                $query .= ', cod_fornecedor = ' . $fornecedor;
-                            }
-                        } elseif ($fornecedor != null) {
-                            $query .= ', cod_fornecedor = ' . $fornecedor;
-                        }
-                    } elseif ($dataCad != null) {
-                        $query .= ', data_cadastro = "' . $dataCad . '"';
-                        if ($fornecedor != null) {
-                            $query .= ', cod_fornecedor = ' . $fornecedor;
-                        }
-                    }
-                } elseif ($dataFab != null) {
-                    $query .= ', data_fabricacao = "' . $dataFab . '"';
-                    if ($dataCad != null) {
-                        $query .= ', data_cadastro = "' . $dataCad . '"';
-                        if ($fornecedor != null) {
-                            $query .= ', cod_fornecedor = ' . $fornecedor;
-                        }
-                    } elseif ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($dataCad != null) {
-                    $query .= ', data_cadastro = "' . $dataCad . '"';
-                    if ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            }
-        } elseif ($cor != null) {
-            $query .= ', cor = "' . $cor . '"';
-            if ($preco != null) {
-                $query .= ', preco = ' . $preco;
-                if ($dataFab != null) {
-                    $query .= ', data_fabricacao = "' . $dataFab . '"';
-                    if ($dataCad != null) {
-                        $query .= ', data_cadastro = "' . $dataCad . '"';
-                        if ($fornecedor != null) {
-                            $query .= ', cod_fornecedor = ' . $fornecedor;
-                        }
-                    } elseif ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($dataCad != null) {
-                    $query .= ', data_cadastro = "' . $dataCad . '"';
-                    if ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                }
-            } elseif ($dataFab != null) {
-                $query .= ', data_fabricacao = "' . $dataFab . '"';
-                if ($dataCad != null) {
-                    $query .= ', data_cadastro = "' . $dataCad . '"';
-                    if ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($dataCad != null) {
-                $query .= ', data_cadastro = "' . $dataCad . '"';
-                if ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($preco != null) {
-            $query .= ', preco = ' . $preco;
-            if ($dataFab != null) {
-                $query .= ', data_fabricacao = "' . $dataFab . '"';
-                if ($dataCad != null) {
-                    $query .= ', data_cadastro = "' . $dataCad . '"';
-                    if ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($dataCad != null) {
-                $query .= ', data_cadastro = "' . $dataCad . '"';
-                if ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            }
-        } elseif ($dataFab != null) {
-            $query .= ', data_fabricacao = "' . $dataFab . '"';
-            if ($dataCad != null) {
-                $query .= ', data_cadastro = "' . $dataCad . '"';
-                if ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($dataCad != null) {
-            $query .= ', data_cadastro = "' . $dataCad . '"';
-            if ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($fornecedor != null) {
-            $query .= ', cod_fornecedor = ' . $fornecedor;
-        }
-    } elseif ($modelo != null) {
-        $query .= 'modelo = "' . $modelo . '"';
-        if ($cor != null) {
-            $query .= ', cor = "' . $cor . '"';
-            if ($preco != null) {
-                $query .= ', preco = ' . $preco;
-                if ($dataFab != null) {
-                    $query .= ', data_fabricacao = "' . $dataFab . '"';
-                    if ($dataCad != null) {
-                        $query .= ', data_cadastro = "' . $dataCad . '"';
-                        if ($fornecedor != null) {
-                            $query .= ', cod_fornecedor = ' . $fornecedor;
-                        }
-                    } elseif ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($dataCad != null) {
-                    $query .= ', data_cadastro = "' . $dataCad . '"';
-                    if ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($dataFab != null) {
-                $query .= ', data_fabricacao = "' . $dataFab . '"';
-                if ($dataCad != null) {
-                    $query .= ', data_cadastro = "' . $dataCad . '"';
-                    if ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($dataCad != null) {
-                $query .= ', data_cadastro = "' . $dataCad . '"';
-                if ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($preco != null) {
-            $query .= ', preco = ' . $preco;
-            if ($dataFab != null) {
-                $query .= ', data_fabricacao = "' . $dataFab . '"';
-                if ($dataCad != null) {
-                    $query .= ', data_cadastro = "' . $dataCad . '"';
-                    if ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($dataCad != null) {
-                $query .= ', data_cadastro = "' . $dataCad . '"';
-                if ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        }
-    } elseif ($cor != null) {
-        $query .= 'cor = "' . $cor . '"';
-        if ($preco != null) {
-            $query .= ', preco = ' . $preco;
-            if ($dataFab != null) {
-                $query .= ', data_fabricacao = "' . $dataFab . '"';
-                if ($dataCad != null) {
-                    $query .= ', data_cadastro = "' . $dataCad . '"';
-                    if ($fornecedor != null) {
-                        $query .= ', cod_fornecedor = ' . $fornecedor;
-                    }
-                } elseif ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($dataCad != null) {
-                $query .= ', data_cadastro = "' . $dataCad . '"';
-                if ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($dataFab != null) {
-
-            $query .= ', data_fabricacao = "' . $dataFab . '"';
-            if ($dataCad != null) {
-                $query .= ', data_cadastro = "' . $dataCad . '"';
-                if ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($dataCad != null) {
-            $query .= ', data_cadastro = "' . $dataCad . '"';
-            if ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($fornecedor != null) {
-            $query .= ', cod_fornecedor = ' . $fornecedor;
-        }
-    } elseif ($preco != null) {
-        $query .= 'preco = ' . $preco;
-        if ($dataFab != null) {
-            $query .= ', data_fabricacao = "' . $dataFab . '"';
-            if ($dataCad != null) {
-                $query .= ', data_cadastro = "' . $dataCad . '"';
-                if ($fornecedor != null) {
-                    $query .= ', cod_fornecedor = ' . $fornecedor;
-                }
-            } elseif ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($dataCad != null) {
-            $query .= ', data_cadastro = "' . $dataCad . '"';
-            if ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($fornecedor != null) {
-            $query .= ', cod_fornecedor = ' . $fornecedor;
-        }
-    } elseif ($dataFab != null) {
-        $query .= 'data_fabricacao = "' . $dataFab . '"';
-        if ($dataCad != null) {
-            $query .= ', data_cadastro = "' . $dataCad . '"';
-            if ($fornecedor != null) {
-                $query .= ', cod_fornecedor = ' . $fornecedor;
-            }
-        } elseif ($fornecedor != null) {
-            $query .= ', cod_fornecedor = ' . $fornecedor;
-        }
-    } elseif ($dataCad != null) {
-        $query .= 'data_cadastro = "' . $dataCad . '"';
-        if ($fornecedor != null) {
-            $query .= ', cod_fornecedor = ' . $fornecedor;
-        }
-    } elseif ($fornecedor != null) {
-        $query .= 'cod_fornecedor = ' . $fornecedor;
+    
+    
+    if($marca != null){
+        alterarMarca($cod, $marca);   
     }
-
-    $query .= ' WHERE cod = ' . $cod . ';';             //aqui a variável é terminada com o final da query sendo concatenado
-    echo $query;                                        //era usado para testar o código
-    alterarCadastro($query);                            //chama a função do CRUD para realizar o update, passando a query por parâmetro
+    if($modelo != null){
+        alterarModelo($cod, $modelo);
+    }
+    if($cor != null){
+        alterarCor($cod, $cor);
+    }
+    if($preco != null){
+        alterarPreco($cod, $preco);
+    }
+    if($dataFab != null){
+        alterarDataFab($cod, $dataFab);
+    }
+    if($dataCad != null){
+        alterarDataCad($cod, $dataCad);
+    }
+    if($fornecedor != null){
+        alterarFornecedor($cod, $fornecedor);
+    }
+    sleep(5); //esse tempo é apenas para eu ter certeza de que caiu aqui
+    header("Location: index.php");
+    
 } catch (Exception $ex) {
     echo "Erro: $ex";                                   //essa mensagem eu estava vendo o tempo inteiro quando tentava fazer com botão para cada campo
 }                                                       //fazendo com essa montueira de ifelse não vi nenhuma vez

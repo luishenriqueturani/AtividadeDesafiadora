@@ -1,6 +1,6 @@
 <?php
 require_once 'CRUD.php';//instância do CRUD
-$cod = $_GET["cod"];//pelo get vem o cod que é atribuido a uma variável
+$cod = $_POST["cod"];//pelo get vem o cod que é atribuido a uma variável
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -39,8 +39,7 @@ $cod = $_GET["cod"];//pelo get vem o cod que é atribuido a uma variável
                     <form action="Deletor.php" method="POST">
                         <ul class="list-group list-group-flush">
                             <!-- as informações do produto são listadas -->
-                            <li class="list-group-item"><input type="hidden" id="inputCod" name="inputCod"> </li><!-- o cod será necessário, então vem em input -->
-                            <small>Não modifique o código, senão dará erro ou pode até apagar um registro errado!</small>
+                            <li class="list-group-item"><input type="hidden" id="inputCod" name="inputCod" value ="<?php echo pesquisaPorCod($cod)[0] ?>"> </li><!-- o cod será necessário, então vem em input -->
                             <li class="list-group-item">Marca: <?php echo pesquisaPorCod($cod)[1]; ?></li>
                             <li class="list-group-item">Modelo: <?php echo pesquisaPorCod($cod)[2]; ?></li>
                             <li class="list-group-item">Cor: <?php echo pesquisaPorCod($cod)[3]; ?></li>
@@ -89,11 +88,6 @@ $cod = $_GET["cod"];//pelo get vem o cod que é atribuido a uma variável
             </div>
 
         </div>   
-        <script>
-            //código para adicionar o valor ao inputCod
-            document.getElementById('inputCod').value = `<?php echo pesquisaPorCod($cod)[0] ?>`
-        </script>
-
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
