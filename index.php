@@ -5,7 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+        
+        <link rel="stylesheet" href="css/estilos.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Atividade Desafiadora - site que manipula estoque</title>
     </head>
@@ -32,23 +33,23 @@
 
             <h3>Lista de Produtos</h3>
             <form action="index.php" method="POST">
-                <div class="form-row">
-                    <div class="form-group col-md-08">
+                <div class="row">
+                    <div class="col">
                         <input type="text" class="form-control" id="InputPesquisa" name="inputPesquisa" placeholder="Digite para realizar a pesqisa...">
                     </div>
-                    <div class="form-group col-md-04">
+                    <div class="col">
                         <select id="selectTipoPesquisa" name="selectTipoPesquisa" class="form-control">
                             <option selected="" value="cod">Código</option>
                             <option value="fornecedor">Fornecedor</option>
                             <option value="preco">Preço</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-02">
+                    <div class="col">
                         <button class="btn btn-primary" type="submit" id="btnPesquisar" name="btnPesquisar">Pesquisar</button>
                     </div>
                 </div>
-                <small>Escolha o tipo de pesquisa antes de pesquisar.</small>
             </form>
+            <small class="info-pesquisa">Escolha o tipo de pesquisa antes de pesquisar.</small>
             <table class="table">  <!-- A tabela é para mostrar os registros -->
                 <thead>
                     <tr>

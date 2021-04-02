@@ -1,0 +1,15 @@
+@charset 'UTF-8';
+/* 
+    Created on : 2 de abr de 2021, 13:47:35
+    Author     : luis_
+*/
+
+.btn-delete {
+    background-color: #B00020;
+    color: #fff;
+}
+
+.info-pesquisa{
+    margin-top: 10pt;
+    margin-bottom: 15pt;
+}
