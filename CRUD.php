@@ -68,7 +68,7 @@ function buscarRegistrosTabela() {
 
 function pesquisaPorCod($cod) {
     $stmt = conectar()->prepare('SELECT p.cod, p.marca, p.modelo, p.cor, p.preco, p.data_fabricacao, p.data_cadastro, f.nome FROM produto as p, fornecedor as f WHERE p.cod_fornecedor = f.id AND p.cod = ? ;');
-    $stmt->bindParam(1, $cod, PDO::PARAM_INT); //na minha opinião, não precisava usar o bindParam para incerir o valor, pois ele é controlado pelo sistema via POST, o usuário não tem acesso a ele, mas...
+    $stmt->bindParam(1, $cod, PDO::PARAM_INT); //na minha opinião, não precisava usar o bindParam para incerir o valor, pois ele é controlado pelo sistema via POST, o usuário não tem acesso a ele, mas né... os bicho são triste
     $stmt->execute();
     while ($registro = $stmt->fetch()) {
         $retorno[0] = $registro["cod"]; //é feito a pesquisa, da mesma forma como nos outros comandos, o retorno é dado e armazenado no array de nome $retorno[].
