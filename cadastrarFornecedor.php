@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="css/estilos.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Atividade Desafiadora - Cadastrar produtos</title>
     </head>
@@ -89,32 +89,51 @@
                 <small>Os campos com " * " são obrigatórios</small>
             </form>
             <?php
-            if(isset($_REQUEST['cadastrar'])){
+            if (isset($_REQUEST['cadastrar'])) {
                 try {
                     require_once 'CRUD.php';
-                    $nome = isset($_REQUEST['nome']) ? $_REQUEST['nome']: null;                      //os valores de cada campo é adicionado em uma variável
-                    $email = isset($_REQUEST['email']) ? $_REQUEST['email']: null;                   //caso o campo esteja em branco, recebe automaticamente o valor de null
-                    $telefone = isset($_REQUEST['telefone']) ? $_REQUEST['telefone']: null;
-                    $rua = isset($_REQUEST['rua']) ? $_REQUEST['rua']: null;
-                    $numero = isset($_REQUEST['num']) ? $_REQUEST['num']: null;
-                    $cidade = isset($_REQUEST['cidade']) ? $_REQUEST['cidade']: null;
-                    $estado = isset($_REQUEST['estado']) ? $_REQUEST['estado']: null;
-                    $cep = isset($_REQUEST['cep']) ? $_REQUEST['cep']: null;
+                    $nome = isset($_REQUEST['nome']) ? $_REQUEST['nome'] : null;                      //os valores de cada campo é adicionado em uma variável
+                    $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : null;                   //caso o campo esteja em branco, recebe automaticamente o valor de null
+                    $telefone = isset($_REQUEST['telefone']) ? $_REQUEST['telefone'] : null;
+                    $rua = isset($_REQUEST['rua']) ? $_REQUEST['rua'] : null;
+                    $numero = isset($_REQUEST['num']) ? $_REQUEST['num'] : null;
+                    $cidade = isset($_REQUEST['cidade']) ? $_REQUEST['cidade'] : null;
+                    $estado = isset($_REQUEST['estado']) ? $_REQUEST['estado'] : null;
+                    $cep = isset($_REQUEST['cep']) ? $_REQUEST['cep'] : null;
                     //se um dos campos for null, vem um alert com uma mensagem para que seja tudo preenchido, senão...
-                    if(empty($nome) || empty($email) || empty($telefone) || empty($rua) || empty($numero) || empty($cidade) || empty($estado) || empty($cep)){
+                    if (empty($nome) || empty($email) || empty($telefone) || empty($rua) || empty($numero) || empty($cidade) || empty($estado) || empty($cep)) {
                         echo '<script>alert(Por favor, preencha todos os campos!);</script>';
-                    }else{//... É chamado a função de cadastro de dados, recebendo as variáveis de parâmetros
+                    } else {//... É chamado a função de cadastro de dados, recebendo as variáveis de parâmetros
                         cadastrarFornecedor($nome, $telefone, $email, $rua, $numero, $cidade, $estado, $cep);
                     }
                 } catch (Exception $ex) {//caso dê erro, é feito um alert com a mensagem de erro
-                    echo '<script>alert('.$ex.');</script>';
+                    echo '<script>alert(' . $ex . ');</script>';
                 }
             }
-            
             ?>
-
-
-
+        </div>
+        <div class="container-fluid">
+            <h3>Lista de Fornecedores</h3>
+            <table class="table">
+                <thead>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Rua</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Cep</th>
+                    <th scope="col">Ações</th>
+                </thead>
+                <tbody>
+                    <?php 
+                    require_once './CRUD.php';
+                    echo ''. pesquisaFornecedores(); 
+                    ?>
+                </tbody>
+            </table>
         </div>
         <script>
             function consultarCEP() {

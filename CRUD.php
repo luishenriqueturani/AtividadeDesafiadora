@@ -231,4 +231,109 @@ function pesquisarCampos($pesquisa, $campo) {
     }
 }
 
+function pesquisaFornecedores(){
+    $resultado = '';
+    $stmt = conectar()->prepare("SELECT * FROM fornecedor;");
+    $stmt->execute();
+    while($registro = $stmt->fetch()){
+        $resultado .= "<tr><td>".$registro["id"]."</td>"
+                . "<td>".$registro["nome"]."</td>"
+                . "<td>".$registro["telefone"]."</td>"
+                . "<td>".$registro["emails"]."</td>"
+                . "<td>".$registro["rua"]."</td>"
+                . "<td>".$registro["num_end"]."</td>"
+                . "<td>".$registro["cidade"]."</td>"
+                . "<td>".$registro["estado"]."</td>"
+                . "<td>".$registro["cep"]."</td>"
+                . '<td><div class="row"><div class="col"><form action="AlterarFornecedor.php" method="POST"><input type="hidden" value="' . $registro["id"] . '" name="id">'
+                . '<button type="submit" name="buttonAlterar'.$registro["id"].'" class="btn btn-primary">Alterar</button></form></div></div>'/* Isso é para depois
+                . '<div class="row"><div class="col"><form action="DeletarFornecedor.php" method="POST"><input type="hidden" value="' . $registro["id"] . '" name="id">'
+                . '<button type="submit" name="buttonDeletar'.$registro["id"].'" class="btn btn-secundary btn-delete">Deletar</button></form></div></div>*/.'</td></tr>';
+    }
+    return $resultado;
+}
+
+function retornaValoresFornecedor($id){
+    $stmt = conectar()->prepare("SELECT * FROM fornecedor WHERE id = ?;");
+    $stmt->bindParam(1, $id);
+    $stmt->execute();
+    while($registro = $stmt->fetch()){
+        $resultado[0] = $registro["id"];
+        $resultado[1] = $registro["nome"];
+        $resultado[2] = $registro["telefone"];
+        $resultado[3] = $registro["emails"];
+        $resultado[4] = $registro["rua"];
+        $resultado[5] = $registro["num_end"];
+        $resultado[6] = $registro["cidade"];
+        $resultado[7] = $registro["estado"];
+        $resultado[8] = $registro["cep"];
+    }
+    return $resultado;
+}
+
+function alterarFornecedorNome($id, $nome){
+    $stmt = conectar()->prepare("UPDATE fornecedor SET nome = ? WHERE id = ?;");
+    $stmt->bindParam(1, $nome, PDO::PARAM_STR);
+    $stmt->bindParam(2, $id, PDO::PARAM_INT);
+    if (!$stmt->execute()) {//se não for possível executar ela, é lançado a mensagem de erro
+        throw new PDOException("Erro!");
+    }
+}
+function alterarFornecedorTelefone($id, $telefone){
+    $stmt = conectar()->prepare("UPDATE fornecedor SET telefone = ? WHERE id = ?;");
+    $stmt->bindParam(1, $telefone, PDO::PARAM_STR);
+    $stmt->bindParam(2, $id, PDO::PARAM_INT);
+    if (!$stmt->execute()) {//se não for possível executar ela, é lançado a mensagem de erro
+        throw new PDOException("Erro!");
+    }
+}
+function alterarFornecedorEmail($id, $email){
+    $stmt = conectar()->prepare("UPDATE fornecedor SET emails = ? WHERE id = ?;");
+    $stmt->bindParam(1, $email, PDO::PARAM_STR);
+    $stmt->bindParam(2, $id, PDO::PARAM_INT);
+    if (!$stmt->execute()) {//se não for possível executar ela, é lançado a mensagem de erro
+        throw new PDOException("Erro!");
+    }
+}
+function alterarFornecedorRua($id, $rua){
+    $stmt = conectar()->prepare("UPDATE fornecedor SET rua = ? WHERE id = ?;");
+    $stmt->bindParam(1, $rua, PDO::PARAM_STR);
+    $stmt->bindParam(2, $id, PDO::PARAM_INT);
+    if (!$stmt->execute()) {//se não for possível executar ela, é lançado a mensagem de erro
+        throw new PDOException("Erro!");
+    }
+}
+function alterarFornecedorNumero($id, $numero){
+    $stmt = conectar()->prepare("UPDATE fornecedor SET num_end = ? WHERE id = ?;");
+    $stmt->bindParam(1, $numero, PDO::PARAM_STR);
+    $stmt->bindParam(2, $id, PDO::PARAM_INT);
+    if (!$stmt->execute()) {//se não for possível executar ela, é lançado a mensagem de erro
+        throw new PDOException("Erro!");
+    }
+}
+function alterarFornecedorCidade($id, $cidade){
+    $stmt = conectar()->prepare("UPDATE fornecedor SET cidade = ? WHERE id = ?;");
+    $stmt->bindParam(1, $cidade, PDO::PARAM_STR);
+    $stmt->bindParam(2, $id, PDO::PARAM_INT);
+    if (!$stmt->execute()) {//se não for possível executar ela, é lançado a mensagem de erro
+        throw new PDOException("Erro!");
+    }
+}
+function alterarFornecedorEstado($id, $estado){
+    $stmt = conectar()->prepare("UPDATE fornecedor SET estado = ? WHERE id = ?;");
+    $stmt->bindParam(1, $estado, PDO::PARAM_STR);
+    $stmt->bindParam(2, $id, PDO::PARAM_INT);
+    if (!$stmt->execute()) {//se não for possível executar ela, é lançado a mensagem de erro
+        throw new PDOException("Erro!");
+    }
+}
+function alterarFornecedorCep($id, $cep){
+    $stmt = conectar()->prepare("UPDATE fornecedor SET cep = ? WHERE id = ?;");
+    $stmt->bindParam(1, $cep, PDO::PARAM_STR);
+    $stmt->bindParam(2, $id, PDO::PARAM_INT);
+    if (!$stmt->execute()) {//se não for possível executar ela, é lançado a mensagem de erro
+        throw new PDOException("Erro!");
+    }
+}
+
 ?>
