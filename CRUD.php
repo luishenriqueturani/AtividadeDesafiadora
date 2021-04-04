@@ -58,11 +58,7 @@ function buscarRegistrosTabela() {
                 . '<button type="submit" name="buttonDeletar' . $registro["cod"] . '" class="btn btn-secundary btn-delete">Deletar</button>'
                 . '</form></div></div></td></tr>';
     }
-    /* while ($registro = $stmt->fetch()) {
-      $retorno .= "<tr><td>" . $registro["cod"] . "</td><td>" . $registro["marca"] . "</td><td>" . $registro["modelo"] . "</td><td>" .
-      $registro["cor"] . "</td><td>" . $registro["preco"] . "</td><td>" . $registro["nome"] . '</td><td><a href="alterardados.php?cod=' . $registro["cod"]
-      . '">Alterar Dados</a> - <a href="excluir.php?cod=' . $registro["cod"] . '">Excluir</a></td></tr>';
-      } */
+    
     return $retorno;
 }
 
