@@ -42,33 +42,33 @@ $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser
                         <input type="hidden" name="id" value="<?php echo "$id"; ?>">
                         <div class="form-group">
                             <label for="Nome">Nome: <?php echo retornaValoresFornecedor($id)[1]; ?></label>
-                            <input type="text" class="form-control" id="Nome" name="inputNome" placeholder="Digite o novo nome do Fornecedor...">
+                            <input type="text" class="form-control" id="Nome" name="inputNome" maxlength="100" placeholder="Digite o novo nome do Fornecedor...">
                         </div>
                         <div class="form-group">
                             <label for="telefone">Telefone: <?php echo retornaValoresFornecedor($id)[2]; ?></label>
-                            <input type="text" class="form-control" id="telefone" name="inputTelefone" placeholder="Digite o novo Telefone...">
+                            <input type="text" class="form-control" id="telefone" name="inputTelefone" maxlength="30" placeholder="Digite o novo Telefone...">
                         </div>
                         <div class="form-group">
                             <label for="email">E-mail: <?php echo retornaValoresFornecedor($id)[3]; ?></label>
-                            <input type="text" class="form-control" id="email" name="inputEmail" placeholder="Digite o novo E-mail...">
+                            <input type="text" class="form-control" id="email" name="inputEmail" maxlength="50" placeholder="Digite o novo E-mail...">
                         </div>
                         <!-- esta parte é para a parte do endereço -->
                         <h5>Endereco</h5>
                         <div class="Form-group">
                             <!-- aqui é pedido que entre com o cep -->
                             <label for="inputCEP">Cep: <?php echo retornaValoresFornecedor($id)[8]; ?></label>
-                            <input type="number" class="form-control" size="50" id="inputCEP" name="cep" placeholder="Digite o cep..." min="0"/>
+                            <input type="number" class="form-control" size="50" id="inputCEP" name="cep" placeholder="Digite o cep..." min="0" max="99999999"/>
                             <small>Digite o cep sem o " - ".</small>
                             <!-- deve-se realizar a pesquisa do cep --> 
                             <button type="button" onclick="consultarCEP()" class="btn btn-primary" id="btnCep">Pesquisar</button>
                             <small>Entre com o CEP para ser pesquisado</small>
                             <fieldset>
                                 <label for="rua">Rua: <?php echo retornaValoresFornecedor($id)[4]; ?></label>
-                                <input type="text" id="rua" name="rua" class="form-control" placeholder="Rua..."> <!-- aqui é devolvido o nome da rua -->
+                                <input type="text" id="rua" name="rua" class="form-control" placeholder="Rua..." maxlength="50"> <!-- aqui é devolvido o nome da rua -->
                                 <label for="cidade">Cidade: <?php echo retornaValoresFornecedor($id)[6]; ?></label>
-                                <input type="text" id="cidade" name="cidade" class="form-control" placeholder="Cidade..."> <!-- aqui é devolvido a cidade -->
+                                <input type="text" id="cidade" name="cidade" class="form-control" placeholder="Cidade..." maxlength="30"> <!-- aqui é devolvido a cidade -->
                                 <label for="estado">Estado: <?php echo retornaValoresFornecedor($id)[7]; ?></label>
-                                <input type="text" id="estado" name="estado" class="form-control" placeholder="Estado..."> <!-- aqui é devolvido a sigla do estado -->
+                                <input type="text" id="estado" name="estado" class="form-control" placeholder="Estado..." maxlength="30"> <!-- aqui é devolvido a sigla do estado -->
                             </fieldset>
 
                             <!-- aqui é pedido o número do endereço -->

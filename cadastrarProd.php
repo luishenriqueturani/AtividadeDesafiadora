@@ -43,27 +43,27 @@
                     <!-- Input do código -->
                     <div class="form-group col-md-6">
                         <label for="inputCod">Código<span>*</span></label>
-                        <input type="number" class="form-control" id="inputCod" name="inputCod" placeholder="Código do produto..." required="" min="0">
+                        <input type="number" class="form-control" id="inputCod" name="inputCod" placeholder="Código do produto..." required="" min="0" max="99999999999">
                     </div>
                     <!-- Input da marca -->
                     <div class="form-group col-md-6">
                         <label for="inputMarca">Marca<span>*</span></label>
-                        <input type="text" class="form-control" id="inputMarca" name="inputMarca" placeholder="Marca..." required="">
+                        <input type="text" class="form-control" id="inputMarca" name="inputMarca" placeholder="Marca..." required="" maxlength="30">
                     </div>
                     <!-- Input do modelo -->
                     <div class="form-group col-md-6">
                         <label for="inputModelo">Modelo<span>*</span></label>
-                        <input type="text" class="form-control" id="inputModelo" name="inputModelo" placeholder="Modelo..." required="">
+                        <input type="text" class="form-control" id="inputModelo" name="inputModelo" placeholder="Modelo..." required="" maxlength="30">
                     </div>
                     <!-- Input da cor -->
                     <div class="form-group col-md-6">
                         <label for="inputCor">Cor<span>*</span></label>
-                        <input type="text" class="form-control" id="inputCor" name="inputCor" placeholder="Cor..." required="">
+                        <input type="text" class="form-control" id="inputCor" name="inputCor" placeholder="Cor..." required="" maxlength="20">
                     </div>
                     <!-- Input do preço -->
                     <div class="form-group col-md-6">
                         <label for="inputPreco">Preço<span>*</span></label>
-                        <input type="number" class="form-control" id="inputPreco" name="inputPreco" placeholder="Preco..." required="">
+                        <input type="number" class="form-control" id="inputPreco" name="inputPreco" placeholder="Preco..." required="" min="0" max="999999999999">
                     </div>
                     <!-- input da data de fabricação -->
                     <div class="form-group col-md-6">
@@ -115,7 +115,7 @@
 
             ?>
 
-
+            
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

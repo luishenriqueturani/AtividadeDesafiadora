@@ -41,23 +41,23 @@ $cod = $_REQUEST["cod"]; //atribui o cod enviado por get a uma variável, para s
                     <form name="alterarVariosDados" action="Alterador.php" method="POST">
                         <input type="hidden" name="cod" value="<?php echo "$cod"; ?>">
                         <div class="form-group">
-                            <label for="marca"><?php echo pesquisaPorCod($cod)[1]; ?></label>
-                            <input type="text" class="form-control" id="marca" name="inputMarca" placeholder="Digite a nova marca...">
+                            <label for="marca">Marca: <?php echo pesquisaPorCod($cod)[1]; ?></label>
+                            <input type="text" class="form-control" id="marca" name="inputMarca" placeholder="Digite a nova marca..." maxlength="30">
                         </div>
                         <!-- Form do Modelo -->
                         <div class="form-group">
-                            <label for="modelo"><?php echo pesquisaPorCod($cod)[2]; ?></label>
-                            <input type="text" class="form-control" id="modelo" name="inputModelo" placeholder="Digite o novo modelo...">
+                            <label for="modelo"> Modelo: <?php echo pesquisaPorCod($cod)[2]; ?></label>
+                            <input type="text" class="form-control" id="modelo" name="inputModelo" placeholder="Digite o novo modelo..." maxlength="30">
                         </div>
                         <!-- Form da cor -->
                         <div class="form-group">
-                            <label for="cor"><?php echo pesquisaPorCod($cod)[3]; ?></label>
-                            <input type="text" class="form-control" id="cor" name="inputCor" placeholder="Digite a nova cor...">
+                            <label for="cor">Cor: <?php echo pesquisaPorCod($cod)[3]; ?></label>
+                            <input type="text" class="form-control" id="cor" name="inputCor" placeholder="Digite a nova cor..." maxlength="20">
                         </div>
                         <!-- Form do preço -->
                         <div class="form-group">
-                            <label for="preco">R$ <?php echo pesquisaPorCod($cod)[4]; ?></label>
-                            <input type="number" class="form-control" id="preco" name="inputPreco" placeholder="Digite o novo preço..." min="0" max="999999">
+                            <label for="preco">Preço: R$ <?php echo pesquisaPorCod($cod)[4]; ?></label>
+                            <input type="number" class="form-control" id="preco" name="inputPreco" placeholder="Digite o novo preço..." min="0" max="999999999999">
                         </div>
                         <!-- Form da data de fabricação -->
                         <div class="form-group">

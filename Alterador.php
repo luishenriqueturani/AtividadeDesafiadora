@@ -17,7 +17,7 @@ try {
     }
     
     
-    if($marca != null){
+    if($marca != null){                         //é para todos, se a variável não está nula, roda uma function com o cod e o valor a ser alterado por parâmetro
         alterarMarca($cod, $marca);   
     }
     if($modelo != null){
@@ -39,7 +39,7 @@ try {
         alterarFornecedor($cod, $fornecedor);
     }
     sleep(5); //esse tempo é apenas para eu ter certeza de que caiu aqui
-    header("Location: index.php");
+    header("Location: index.php");//envia o usuário para a tela inicial
     
 } catch (Exception $ex) {
     echo "Erro: $ex";                                   //essa mensagem eu estava vendo o tempo inteiro quando tentava fazer com botão para cada campo

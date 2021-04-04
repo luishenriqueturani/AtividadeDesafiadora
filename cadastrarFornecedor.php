@@ -43,17 +43,17 @@
                     <!-- pede o nome -->
                     <div class="form-group col-md-6">
                         <label for="inputNome">Nome<span>*</span></label>
-                        <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome do fornecedor..." required="">
+                        <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome do fornecedor..." required="" maxlength="100">
                     </div>
                     <!-- pede o e-mail -->
                     <div class="form-group col-md-6">
                         <label for="inputEmail">Email<span>*</span></label>
-                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email..." required="">
+                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email..." required="" maxlength="50">
                     </div>
                     <!-- pede o telefone -->
                     <div class="form-group col-md-6">
                         <label for="inputFone">Telefone<span>*</span></label>
-                        <input type="text" class="form-control" id="inputFone" name="telefone" placeholder="Telefone..." required="">
+                        <input type="text" class="form-control" id="inputFone" name="telefone" placeholder="Telefone..." required="" maxlength="30">
                     </div>
                 </div>
                 <!-- termina aqui a primeira parte do formulário -->
@@ -63,23 +63,23 @@
                 <div class="Form-group">
                     <!-- aqui é pedido que entre com o cep -->
                     <label for="inputCEP">Digite o cep<span>*</span></label>
-                    <input type="number" class="form-control" size="50" id="inputCEP" name="cep" placeholder="Digite o cep..." min="0"  required=""/>
+                    <input type="number" class="form-control" size="50" id="inputCEP" name="cep" placeholder="Digite o cep..." min="0"  max="99999999" required=""/>
                     <small>Digite o cep sem o " - ".</small>
                     <!-- deve-se realizar a pesquisa do cep --> 
                     <button type="button" onclick="consultarCEP()" class="btn btn-primary" id="btnCep">Pesquisar</button>
                     <small>Entre com o CEP para ser pesquisado</small>
                     <fieldset>
                         <label for="rua">Rua</label>
-                        <input type="text" id="rua" name="rua" class="form-control" placeholder="Rua..."> <!-- aqui é devolvido o nome da rua -->
+                        <input type="text" id="rua" name="rua" class="form-control" placeholder="Rua..." maxlength="50"> <!-- aqui é devolvido o nome da rua -->
                         <label for="cidade">Cidade</label>
-                        <input type="text" id="cidade" name="cidade" class="form-control" placeholder="Cidade..."> <!-- aqui é devolvido a cidade -->
+                        <input type="text" id="cidade" name="cidade" class="form-control" placeholder="Cidade..." maxlength="30"> <!-- aqui é devolvido a cidade -->
                         <label for="estado">Estado</label>
-                        <input type="text" id="estado" name="estado" class="form-control" placeholder="Estado..."> <!-- aqui é devolvido a sigla do estado -->
+                        <input type="text" id="estado" name="estado" class="form-control" placeholder="Estado..." maxlength="30"> <!-- aqui é devolvido a sigla do estado -->
                     </fieldset>
 
                     <!-- aqui é pedido o número do endereço -->
                     <label for="num">Número<span>*</span></label>
-                    <input type="number" class="form-control" size="50" id="num" name="num" placeholder="Número do rua..." min="0" required=""/>
+                    <input type="number" class="form-control" size="50" id="num" name="num" placeholder="Número do rua..." min="0" max="99999999999" required=""/>
 
                 </div>
                 <hr/>
