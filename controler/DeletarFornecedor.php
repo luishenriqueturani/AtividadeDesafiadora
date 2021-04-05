@@ -1,6 +1,6 @@
 <?php
 
-require_once './CRUD.php';
+require_once '../model/CRUD.php';
 
 $id = $_POST["id"]; //recebe via post o id do fornecedor
 
@@ -12,7 +12,7 @@ if ($id != null) {//se por um acaso deu algum erro
         } else {//senão
             if (deletarFornecedor($id)) {//executa o comando, tendo retorno positivo da query
                 sleep(3); //espera 3 segundos
-                header("Location: cadastrarFornecedor.php"); //e retorna para a tela de cadastro de fornecedor
+                header("Location: ../view/cadastrarFornecedor.php"); //e retorna para a tela de cadastro de fornecedor
             } else {//se o retorno for negativo
                 throw new PDOException("Erro!"); //lança a exceção do erro ocorrido
             }

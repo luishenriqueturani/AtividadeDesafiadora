@@ -3,14 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/AlteradorFornecedor.php</file>
-            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/Alterador.php</file>
-            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/excluir.php</file>
-            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/alterardados.php</file>
-            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/CRUD.php</file>
-            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/AlterarFornecedor.php</file>
-            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/index.php</file>
-            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/cadastrarFornecedor.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/view/alterardados.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/model/CRUD.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/controler/Deletor.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/view/excluir.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/controler/Alterador.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/controler/DeletarFornecedor.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/controler/CadastradorDeProdutos.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/view/index.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/view/AlterarFornecedor.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/controler/AlteradorFornecedor.php</file>
+            <file>file:/C:/xampp/htdocs/AtividadeDesafiadora/view/cadastrarProd.php</file>
         </group>
     </open-files>
 </project-private>

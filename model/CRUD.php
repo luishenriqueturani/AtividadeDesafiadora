@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Conector.php';
+require_once '../controler/Conector.php';
 
 function selecionaFornecedor() {
     $retorno = "";
@@ -26,6 +26,8 @@ function cadastrarProduto($cod, $marca, $modelo, $cor, $preco, $fornecedor, $dat
     $stmt->bindParam(8, $dataAtual, PDO::PARAM_STR);
 
     $stmt->execute(); //a variável $stmt recebe o camando, no local do dado a ser cadastrado é concatenado a variável com o valor a ser cadastrado, a conexão é feita e o comando é preparado, depois é executado.
+
+    
 }
 
 function cadastrarFornecedor($nome, $telefone, $email, $rua, $numero, $cidade, $estado, $cep) {
@@ -85,7 +87,7 @@ function deletarRegistro($cod) {
     $stmt->bindParam(1, $cod, PDO::PARAM_INT); //o comando bindParam recebe um índice para buscar o ?, o valor que ele põe no lugar
     if ($stmt->execute()) {//se o comando foi executado executa os códigos, senão...
         sleep(5); //esse tempo é apenas para eu ter serteza de que caiu aqui
-        header("Location: index.php"); //o usuário é enviádo para a tela inicial após os 5 segundos
+        header("Location: ../view/index.php"); //o usuário é enviádo para a tela inicial após os 5 segundos
     } else {//... executa o um código que lança uma mensagem com as informações do erro
         throw new PDOException("Erro!");
     }
@@ -244,7 +246,7 @@ function pesquisaFornecedores(){
                 . "<td>".$registro["cep"]."</td>"
                 . '<td><div class="row"><div class="col"><form action="AlterarFornecedor.php" method="POST"><input type="hidden" value="' . $registro["id"] . '" name="id">'
                 . '<button type="submit" name="buttonAlterar'.$registro["id"].'" class="btn btn-primary">Alterar</button></form></div></div>'
-                . '<div class="row"><div class="col"><form action="DeletarFornecedor.php" method="POST"><input type="hidden" value="' . $registro["id"] . '" name="id">'
+                . '<div class="row"><div class="col"><form action="../controler/DeletarFornecedor.php" method="POST"><input type="hidden" value="' . $registro["id"] . '" name="id">'
                 . '<button type="submit" name="buttonDeletar'.$registro["id"].'" class="btn btn-secundary btn-delete">Deletar</button></form></div></div></td></tr>';
     }
     return $resultado;

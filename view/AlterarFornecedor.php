@@ -1,5 +1,5 @@
 <?php
-require_once 'CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
+require_once '../model/CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
 $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser usado na página
 ?>
 <!DOCTYPE html>
@@ -38,7 +38,7 @@ $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser
             <div class="row">
                 <div class="col-lg">
 
-                    <form name="alterarDados" action="AlteradorFornecedor.php" method="POST">
+                    <form name="alterarDados" action="../controler/AlteradorFornecedor.php" method="POST">
                         <input type="hidden" name="id" value="<?php echo "$id"; ?>">
                         <div class="form-group">
                             <label for="Nome">Nome: <?php echo retornaValoresFornecedor($id)[1]; ?></label>
@@ -87,25 +87,7 @@ $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser
             </div>
 
         </div> 
-        <script>
-            function consultarCEP() {
-                var cep = $("#inputCEP").val(); //a variável cep recebe o valor do cep digitado
-                var url = "http://viacep.com.br/ws/" + cep + "/json/"; //a variável url recebe um endereço do site de pesquisa de cep, no espaço
-                //onde entra o cep, o valor da variável cep inserido
-                $.getJSON(url, function (result) {      //usando o jquery, é usado uma function para manipular json, entrando com a url e recebendo o json em uma function...
-                    console.log(result);                //o resultado em json tem seu retorno no console
-                    if (result.erro) {                  //caso o resultado de erro, cep inválido
-                        alert("CEP inválido!");         //solta um alerta de cep inválido
-                    } else {                            //senão...
-                        document.getElementById('rua').value = result.logradouro;       //o imput rua recebe o valor de logradouro
-                        document.getElementById('cidade').value = result.localidade;    //o imput cidade recebe o valor de localidade
-                        document.getElementById('estado').value = result.uf;            //o imput estado recebe o valor de uf
-                    }                                                                   //eu sei que é estranho usar comandos mesclando jquery e js "puro", mas na pressa vai o que está na ponta da lingua
-                }).fail(function () {                   //caso dê erro, retorna um alert informando o erro
-                    alert('Falha ao consultar o CEP!');
-                });
-            }
-        </script>
+        <script src="../js/funcoes.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

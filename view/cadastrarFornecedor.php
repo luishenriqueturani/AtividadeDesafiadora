@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/estilos.css" type="text/css">
+        <link rel="stylesheet" href="../css/estilos.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Atividade Desafiadora - Cadastrar produtos</title>
     </head>
@@ -35,7 +35,7 @@
                 Começa o formulário, atua nesta mesma página
                 Usa o método POST
             -->
-            <form action="cadastrarFornecedor.php" method="POST" name="cad-fornecedor">
+            <form action="../controler/CadastradorDeFornecedor.php" method="POST" name="cad-fornecedor">
                 <!-- formulário do fronecedor -->
 
                 <h3>Dados do Fornecedor</h3>
@@ -88,29 +88,7 @@
                 <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button>
                 <small>Os campos com " * " são obrigatórios</small>
             </form>
-            <?php
-            if (isset($_REQUEST['cadastrar'])) {
-                try {
-                    require_once 'CRUD.php';
-                    $nome = isset($_REQUEST['nome']) ? $_REQUEST['nome'] : null;                      //os valores de cada campo é adicionado em uma variável
-                    $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : null;                   //caso o campo esteja em branco, recebe automaticamente o valor de null
-                    $telefone = isset($_REQUEST['telefone']) ? $_REQUEST['telefone'] : null;
-                    $rua = isset($_REQUEST['rua']) ? $_REQUEST['rua'] : null;
-                    $numero = isset($_REQUEST['num']) ? $_REQUEST['num'] : null;
-                    $cidade = isset($_REQUEST['cidade']) ? $_REQUEST['cidade'] : null;
-                    $estado = isset($_REQUEST['estado']) ? $_REQUEST['estado'] : null;
-                    $cep = isset($_REQUEST['cep']) ? $_REQUEST['cep'] : null;
-                    //se um dos campos for null, vem um alert com uma mensagem para que seja tudo preenchido, senão...
-                    if (empty($nome) || empty($email) || empty($telefone) || empty($rua) || empty($numero) || empty($cidade) || empty($estado) || empty($cep)) {
-                        echo '<script>alert(Por favor, preencha todos os campos!);</script>';
-                    } else {//... É chamado a função de cadastro de dados, recebendo as variáveis de parâmetros
-                        cadastrarFornecedor($nome, $telefone, $email, $rua, $numero, $cidade, $estado, $cep);
-                    }
-                } catch (Exception $ex) {//caso dê erro, é feito um alert com a mensagem de erro
-                    echo '<script>alert(' . $ex . ');</script>';
-                }
-            }
-            ?>
+            
         </div>
         <div class="container-fluid">
             <h3>Lista de Fornecedores</h3>
@@ -128,35 +106,11 @@
                     <th scope="col">Ações</th>
                 </thead>
                 <tbody>
-                    <?php 
-                    require_once './CRUD.php';
-                    echo ''. pesquisaFornecedores(); 
-                    ?>
+                    <?php require_once '../model/CRUD.php'; echo ''. pesquisaFornecedores(); ?><!-- por que diabos precisa chamar novamente o CRUD ?????? -->
                 </tbody>
             </table>
         </div>
-        <script>
-            function consultarCEP() {
-                var cep = $("#inputCEP").val(); //a variável cep recebe o valor do cep digitado
-                var url = "http://viacep.com.br/ws/" + cep + "/json/"; //a variável url recebe um endereço do site de pesquisa de cep, no espaço
-                //onde entra o cep, o valor da variável cep inserido
-                $.getJSON(url, function (result) {      //usando o jquery, é usado uma function para manipular json, entrando com a url e recebendo o json em uma function...
-                    console.log(result);                //o resultado em json tem seu retorno no console
-                    if (result.erro) {                  //caso o resultado de erro, cep inválido
-                        alert("CEP inválido!");         //solta um alerta de cep inválido
-                    } else {                            //senão...
-                        document.getElementById('rua').value = result.logradouro;       //o imput rua recebe o valor de logradouro
-                        document.getElementById('cidade').value = result.localidade;    //o imput cidade recebe o valor de localidade
-                        document.getElementById('estado').value = result.uf;            //o imput estado recebe o valor de uf
-                    }                                                                   //eu sei que é estranho usar comandos mesclando jquery e js "puro", mas na pressa vai o que está na ponta da lingua
-                }).fail(function () {                   //caso dê erro, retorna um alert informando o erro
-                    alert('Falha ao consultar o CEP!');
-                });
-            }
-        </script>
-
-
-
+        <script src="../js/funcoes.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

@@ -1,6 +1,6 @@
 <?php
 
-require_once './CRUD.php';//instancia do CRUD
+require_once '../model/CRUD.php';//requisição do CRUD
 
 if (isset($_POST["deleta-dados"])) {//caso o botão seja precionado
     try {//try catch trata de um possível erro

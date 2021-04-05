@@ -1,5 +1,5 @@
 <?php
-require_once 'CRUD.php';//instância do CRUD
+require_once '../model/CRUD.php';//instância do CRUD
 $cod = $_POST["cod"];//pelo get vem o cod que é atribuido a uma variável
 ?>
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $cod = $_POST["cod"];//pelo get vem o cod que é atribuido a uma variável
             <div class="row">
                 <div class="col-lg">
                     <!-- inicia aqui o formulário -->
-                    <form action="Deletor.php" method="POST">
+                    <form action="../controler/Deletor.php" method="POST">
                         <ul class="list-group list-group-flush">
                             <!-- as informações do produto são listadas -->
                             <li class="list-group-item"><input type="hidden" id="inputCod" name="inputCod" value ="<?php echo pesquisaPorCod($cod)[0] ?>"> </li><!-- o cod será necessário, então vem em input -->
@@ -81,9 +81,6 @@ $cod = $_POST["cod"];//pelo get vem o cod que é atribuido a uma variável
                     </form>
 
 
-
-                    <?php
-                    ?>
                 </div>
             </div>
 

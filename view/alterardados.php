@@ -1,5 +1,5 @@
 <?php
-require_once 'CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
+require_once '../model/CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
 $cod = $_REQUEST["cod"]; //atribui o cod enviado por get a uma variável, para ser usado na página
 ?>
 <!DOCTYPE html>
@@ -38,7 +38,7 @@ $cod = $_REQUEST["cod"]; //atribui o cod enviado por get a uma variável, para s
             <div class="row">
                 <div class="col-lg">
                     
-                    <form name="alterarVariosDados" action="Alterador.php" method="POST">
+                    <form name="alterarVariosDados" action="../controler/Alterador.php" method="POST">
                         <input type="hidden" name="cod" value="<?php echo "$cod"; ?>">
                         <div class="form-group">
                             <label for="marca">Marca: <?php echo pesquisaPorCod($cod)[1]; ?></label>
