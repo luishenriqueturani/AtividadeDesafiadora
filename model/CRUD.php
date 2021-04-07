@@ -354,5 +354,16 @@ function deletarFornecedor($id){
     return $stmt->execute();//executa a query
 }
 
+function testarLogin($usuario, $senha){
+    $cont = 0;
+    $stmt = conectar()->prepare("SELECT * FROM usuario WHERE usuario = ? and senha = ?;");
+    $stmt->bindParam(1, $usuario, PDO::PARAM_STR);
+    $stmt->bindParam(2, $senha, PDO::PARAM_STR);
+    $stmt->execute();
+    while($stmt->fetch()){
+        $cont++;
+    }
+    return $cont;
+}
 
 ?>

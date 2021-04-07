@@ -26,8 +26,16 @@ create table produto(
 );
 
 insert into fornecedor values
-(default,"American Imports","51 999999999","contato@americanimport.com","Bartolomeu de Gusmão",1111,"Novo Hamburgo","RS","93542000");
+(default,"American Imports","51 999999999","contato@americanimport.com","Bartolomeu de Gusmão",1111,"Novo Hamburgo","RS","93542000"),
+(default,"Ali Express","51 998888888","contato@americanimport.com","Bartolomeu de Gusmão",2222,"Novo Hamburgo","RS","93542000");
 
 insert into produto values
 (888,'Asus','Max Shot','preto',1000,2,'2018-10-01','2021-03-04'),
 (999,'Asus','Rog Phone','preto',8000,2,'2020-10-01','2021-03-04');
+
+create table usuario(
+	usuario varchar(50) not null primary key,
+    senha varchar(30) not null
+);
+
+insert into usuario values ('teste','teste');

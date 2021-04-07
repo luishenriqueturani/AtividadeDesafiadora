@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+if(isset($_SESSION['usuario']) == false){
+    header("Location: Login.php");
+}
+
+
+
+
 require_once '../model/CRUD.php';//instância do CRUD
 $cod = $_POST["cod"];//pelo get vem o cod que é atribuido a uma variável
 ?>

@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if(isset($_SESSION['usuario']) == false){
+    header("Location: Login.php");
+}
 require_once '../model/CRUD.php';//requisição de uso do crud
 require_once '../model/Produto.php';//requisição de uso do produto
 $prod = new Produtos();//instância de produtos

@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if(isset($_SESSION['usuario']) == false){
+    header("Location: Login.php");
+}
 require_once '../model/CRUD.php';//requisição do CRUD
 
 if (isset($_POST["deleta-dados"])) {//caso o botão seja precionado

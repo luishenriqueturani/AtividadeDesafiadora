@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if(isset($_SESSION['usuario']) == false){
+    header("Location: Login.php");
+}
 require_once '../model/CRUD.php';
 
 $id = $_POST["id"]; //recebe via post o id do fornecedor

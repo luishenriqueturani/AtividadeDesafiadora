@@ -1,4 +1,12 @@
 <?php
+
+session_start();
+if(isset($_SESSION['usuario']) == false){
+    header("Location: Login.php");
+}
+
+
+
 require_once '../model/CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
 $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser usado na página
 ?>
