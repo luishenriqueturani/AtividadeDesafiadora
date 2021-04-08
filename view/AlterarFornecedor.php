@@ -1,11 +1,15 @@
 <?php
 
-session_start();
-if(isset($_SESSION['usuario']) == false){
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    //echo 'Ele invalidou usuário e senha';
+    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
     header("Location: Login.php");
 }
-
-
 
 require_once '../model/CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
 $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser usado na página

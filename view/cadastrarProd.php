@@ -1,6 +1,12 @@
 <?php
-session_start();
-if(isset($_SESSION['usuario']) == false){
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    //echo 'Ele invalidou usuário e senha';
+    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
     header("Location: Login.php");
 }
 ?>

@@ -1,6 +1,12 @@
 <?php
-session_start();
-if(isset($_SESSION['usuario']) == false){
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    //echo 'Ele invalidou usuário e senha';
+    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
     header("Location: Login.php");
 }
 ?>
@@ -11,7 +17,7 @@ if(isset($_SESSION['usuario']) == false){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        
+
         <link rel="stylesheet" href="../css/estilos.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Atividade Desafiadora - site que manipula estoque</title>
@@ -76,12 +82,12 @@ if(isset($_SESSION['usuario']) == false){
 
 
                     if (isset($_POST["btnPesquisar"])) { //se o botão foi precionado é executado o código, senão....
-                        $pesquisa = isset($_POST["inputPesquisa"]) ? $_POST["inputPesquisa"] : null;//se foi digitado algo o valor é atribuido a variável, senão ela fica nula
-                        $campo = $_POST["selectTipoPesquisa"];//como o usuário não precisa digitar nada, e o valor é controlado pelo select, apenas é adicionado o valor a variável
+                        $pesquisa = isset($_POST["inputPesquisa"]) ? $_POST["inputPesquisa"] : null; //se foi digitado algo o valor é atribuido a variável, senão ela fica nula
+                        $campo = $_POST["selectTipoPesquisa"]; //como o usuário não precisa digitar nada, e o valor é controlado pelo select, apenas é adicionado o valor a variável
                         if ($pesquisa == null) {//se o valor a ser pesquisado for nulo é mostrado uma mensagem ao usuário, senão...
                             echo "Por favor, digite o que deseja pesquisar!";
                         } else {
-                            echo "" . pesquisarCampos($pesquisa, $campo);//é chamado uma função tendo os parâmetros passados
+                            echo "" . pesquisarCampos($pesquisa, $campo); //é chamado uma função tendo os parâmetros passados
                         }
                     } else {
                         try {//try catch para tratar um pocível erro
