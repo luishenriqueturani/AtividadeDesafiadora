@@ -5,12 +5,18 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
-    //echo 'Ele invalidou usuário e senha';
-    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: ../view/Login.php");
+    require_once '../view/GUI.php'; //chamado do gui
+    $gui = new GUI();//instância do objeto de gui
+    echo $gui->gerarInformativo("Atenção", "Seu tempo de seção espirou ou não foi feito Login!");//gera um modal informando a situação
+    header("refresh: 3; ../view/Login.php");//após aguardar 3 segundos transfere para a tela de login
 }
+//termina verificação de session
+
+
 require_once '../model/CRUD.php';
 require_once '../model/Produto.php';
+require_once '../view/GUI.php';
+$gui = new GUI();
 $prod = new Produtos();
 $prod->setCod($_REQUEST["cod"]);
 try {
@@ -50,11 +56,11 @@ try {
     if($prod->getCodFornecedor() != null){
         alterarFornecedor($prod->getCod(), $prod->getCodFornecedor());
     }
-    echo 'Operação realizada com sucesso!';
-    header("refresh: 3; ../view/index.php");;//envia o usuário para a tela inicial
+    echo $gui->gerarInformativo("Alterado", "Operação realizada com sucesso!");
+    header("refresh: 3; ../view/index.php");//envia o usuário para a tela inicial
     
 } catch (Exception $ex) {
-    echo "Erro: $ex";                                   //essa mensagem eu estava vendo o tempo inteiro quando tentava fazer com botão para cada campo
+    echo $gui->gerarInformativo("Erro! :( ", "$ex");                                   //essa mensagem eu estava vendo o tempo inteiro quando tentava fazer com botão para cada campo
     header("refresh: 3; ../view/index.php");            //fazendo com essa montueira de ifelse não vi nenhuma vez
 }   
 ?>

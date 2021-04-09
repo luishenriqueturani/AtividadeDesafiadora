@@ -5,10 +5,14 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
-    //echo 'Ele invalidou usuário e senha';
-    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: ../view/Login.php");
+    require_once '../view/GUI.php'; //chamado do gui
+    $gui = new GUI();//instância do objeto de gui
+    echo $gui->gerarInformativo("Atenção", "Seu tempo de seção espirou ou não foi feito Login!");//gera um modal informando a situação
+    header("refresh: 3; ../view/Login.php");//após aguardar 3 segundos transfere para a tela de login
 }
+//termina a verificação de session
+
+
 require_once '../model/CRUD.php';
 require_once '../model/Fornecedor.php';
 $forn = new Fornecedor();
@@ -48,8 +52,9 @@ try {
     if($forn->getCep() != null){
         alterarFornecedorCep($forn->getId(), $forn->getCep());
     }
-    echo 'Operação realizada com sucesso!';
+    echo $gui->gerarInformativo("Alterado", "Operação realizada com sucesso!");//chama função que mostra um modal com as informações passadas por parâmetro
     header("refresh: 3; ../view/cadastrarFornecedor.php");//envia o usuário para a tela de cadastro do fornecedor
 } catch (Exception $ex) {
-    echo "$ex";
+    echo $gui->gerarInformativo("Erro! :( ", "$ex");    //a função agora é usada para mostrar o conteúdo do erro
+    header("refresh: 3; ../view/index.php");            //após 3 segundos é transferido para a tela inicial
 }

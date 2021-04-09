@@ -2,12 +2,13 @@
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+require_once './GUI.php'; //chamado do gui
+$gui = new GUI(); //instância do objeto de gui
 if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
-    //echo 'Ele invalidou usuário e senha';
-    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: Login.php");
+    echo $gui->gerarInformativo("Atenção", "Seu tempo de seção espirou ou não foi feito Login!"); //gera um modal informando a situação
+    header("refresh: 3; ../view/Login.php"); //após aguardar 3 segundos transfere para a tela de login
 }
 ?>
 <!DOCTYPE html>
@@ -88,9 +89,7 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
                 </thead>
                 <tbody>
                     <?php
-                    require_once '../model/CRUD.php'; //instancia o CRUD
-
-
+                    require_once '../model/CRUD.php'; //chamada do CRUD
 
 
                     if (isset($_POST["btnPesquisar"])) { //se o botão foi precionado é executado o código, senão....
@@ -105,19 +104,13 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
                         try {//try catch para tratar um pocível erro
                             echo "" . buscarRegistrosTabela(); //chama a função para imprimir uma tabela, 
                         } catch (Exception $ex) {
-                            echo '<script>alert(' . $ex . ');</script>'; //caso dê erro, mostra um alert com o  erro
+                            echo $gui->gerarInformativo("ERRO! :(", "$ex"); //caso dê erro, mostra um modal com o  erro
                         }
                     }
                     ?>
                 </tbody>
             </table>
-
-
         </div>
-
-
-
-
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

@@ -6,10 +6,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
-    //echo 'Ele invalidou usuário e senha';
-    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: ../view/Login.php");
+    require_once '../view/GUI.php'; //chamado do gui
+    $gui = new GUI();//instância do objeto de gui
+    echo $gui->gerarInformativo("Atenção", "Seu tempo de seção espirou ou não foi feito Login!");//gera um modal informando a situação
+    header("refresh: 3; ../view/Login.php");//após aguardar 3 segundos transfere para a tela de login
 }
+//termina a verificação de session
 
 
 require_once '../model/CRUD.php';
@@ -25,12 +27,13 @@ try {
         echo 'Usuário ou senha em branco';
         header("refresh: 3; ../view/CadUsuario.php");
     } else {
-        echo cadastrarUsuario($user->getUsuario(), $user->getSenha());
-
+        echo $gui->gerarInformativo("", cadastrarUsuario($user->getUsuario(), $user->getSenha()));//chama função de mostrar mensagem, enviando por parâmetro uma função do crud
+                                                                                                            //que verifica e realiza o cadastro do usuário retornando uma mensagem
+                                                                                                            //que é mostrada ao usuário em um modal
         header("refresh: 3; ../view/index.php");
     }
 } catch (Exception $ex) {
-    echo $ex;
-    header("refresh: 3; ../view/index.php");
+    echo $gui->gerarInformativo("Erro! :( ", "$ex");    //a função agora é usada para mostrar o conteúdo do erro
+    header("refresh: 3; ../view/index.php");            //após 3 segundos é transferido para a tela inicial
 }
 

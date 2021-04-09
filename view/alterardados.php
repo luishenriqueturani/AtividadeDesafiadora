@@ -6,10 +6,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
-    //echo 'Ele invalidou usuário e senha';
-    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: Login.php");
+    require_once './GUI.php'; //chamado do gui
+    $gui = new GUI(); //instância do objeto de gui
+    echo $gui->gerarInformativo("Atenção", "Seu tempo de seção espirou ou não foi feito Login!"); //gera um modal informando a situação
+    header("refresh: 3; ../view/Login.php"); //após aguardar 3 segundos transfere para a tela de login
 }
+//termina a verificação de session
 
 require_once '../model/CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
 $cod = $_REQUEST["cod"]; //atribui o cod enviado por get a uma variável, para ser usado na página
@@ -107,12 +109,8 @@ $cod = $_REQUEST["cod"]; //atribui o cod enviado por get a uma variável, para s
                         </div>
                         <button type="submit" name="alterar" class="btn btn-primary">Alterar</button><!-- botão para chamar a função de alterar dados -->
                     </form>
-
-
-
                 </div>
             </div>
-
         </div>    
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

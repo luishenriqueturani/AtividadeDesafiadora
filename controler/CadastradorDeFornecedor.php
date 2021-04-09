@@ -5,10 +5,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
-    //echo 'Ele invalidou usuário e senha';
-    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: ../view/Login.php");
+    require_once '../view/GUI.php'; //chamado do gui
+    $gui = new GUI();//instância do objeto de gui
+    echo $gui->gerarInformativo("Atenção", "Seu tempo de seção espirou ou não foi feito Login!");//gera um modal informando a situação
+    header("refresh: 3; ../view/Login.php");//após aguardar 3 segundos transfere para a tela de login
 }
+//termina a verificação de session
 
 
 require_once '../model/CRUD.php';//requisição do crud
@@ -31,10 +33,11 @@ try {
     } else {//... É chamado a função de cadastro de dados, recebendo as variáveis via get de parâmetros
         cadastrarFornecedor($fornecedor->getNome(), $fornecedor->getTelefone(), $fornecedor->getEmail(), $fornecedor->getRua(), $fornecedor->getNumEndereco(), $fornecedor->getCidade(), $fornecedor->getEstado(), $fornecedor->getCep());
         $fornecedor->limpar();//chama a função para fazer a limpeza das variáveis
-        echo 'Cadastrado com sucesso';
+        echo $gui->gerarInformativo("Cadastrado", "Cadastro realizado com sucesso!");//chama função que mostra um modal com as informações passadas por parâmetro
         header("refresh: 3; ../view/cadastrarFornecedor.php");//transfere o usuário para a tela de cadastro de funcionários, onde há a lista dos cadastrados
     }
-} catch (Exception $ex) {//caso dê erro, é feito um alert com a mensagem de erro
-    echo '<script>alert(' . $ex . ');</script>';
+} catch (Exception $ex) {
+    echo $gui->gerarInformativo("Erro! :( ", "$ex");    //a função agora é usada para mostrar o conteúdo do erro
+    header("refresh: 3; ../view/index.php");            //após 3 segundos é transferido para a tela inicial
 }
 

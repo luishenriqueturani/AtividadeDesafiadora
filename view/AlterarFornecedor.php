@@ -6,10 +6,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
-    //echo 'Ele invalidou usuário e senha';
-    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: Login.php");
+    require_once './GUI.php'; //chamado do gui
+    $gui = new GUI(); //instância do objeto de gui
+    echo $gui->gerarInformativo("Atenção", "Seu tempo de seção espirou ou não foi feito Login!"); //gera um modal informando a situação
+    header("refresh: 3; ../view/Login.php"); //após aguardar 3 segundos transfere para a tela de login
 }
+//termina a verificação de session
 
 require_once '../model/CRUD.php'; //chama o Objeto CRUD, para ser possível usar suas funções
 $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser usado na página
@@ -23,7 +25,6 @@ $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser
         ?>                                                                          <!--cod, retornando um array, que na posição 2 vem o nome do produto, sendo posto no title da página
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
 
     </head>
     <body>
@@ -97,18 +98,11 @@ $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser
                             <!-- aqui é pedido o número do endereço -->
                             <label for="num">Número: <?php echo retornaValoresFornecedor($id)[5]; ?></label>
                             <input type="number" class="form-control" size="50" id="num" name="num" placeholder="Número do rua..." min="0"/>
-
                         </div>
-                        
-
                         <button type="submit" name="alterar" class="btn btn-primary">Alterar</button><!-- botão para chamar a função de alterar dados -->
                     </form>
-
-
-
                 </div>
             </div>
-
         </div> 
         <script src="../js/funcoes.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

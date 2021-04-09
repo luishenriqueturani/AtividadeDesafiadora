@@ -5,10 +5,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
-    //echo 'Ele invalidou usuário e senha';
-    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: Login.php");
+    require_once './GUI.php'; //chamado do gui
+    $gui = new GUI(); //instância do objeto de gui
+    echo $gui->gerarInformativo("Atenção", "Seu tempo de seção espirou ou não foi feito Login!"); //gera um modal informando a situação
+    header("refresh: 3; ../view/Login.php"); //após aguardar 3 segundos transfere para a tela de login
 }
+//termina a verificação de session
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -56,7 +58,7 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
         <div class="container">
             <!-- 
                 Começa o formulário, atua nesta mesma página
-                Usa o método POST para maior segurança
+                Usa o método POST
             -->
             <form action="../controler/CadastradorDeProdutos.php" method="POST">
                 <!-- Pede os dados do protuto -->
@@ -107,15 +109,12 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
                     
                     ?>
                 </div>
-
                 <br>
                 <button type="submit" name="cadastrarProdutos" class="btn btn-primary">Cadastrar</button> <!-- botão de cadastro -->
                 <small>Os campos com " * " são obrigatórios</small>
                 <small>A data atual é pega do sistema.</small>
             </form>
-            
         </div>
-
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

@@ -1,39 +1,29 @@
 <?php
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
-if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
-    unset($_SESSION['usuario']);
-    unset($_SESSION['senha']);
-    //echo 'Ele invalidou usuário e senha';
-    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: ../view/Login.php");
-}
+
 require_once '../model/CRUD.php';
 require_once '../model/Usuarios.php';
+require_once '../view/GUI.php';
 
+$gui = new GUI();
 $user = new Usuarios();
 
 try {
     $user->setUsuario(isset($_POST['usuario']) ? $_POST['usuario'] : null);
     $user->setSenha(isset($_POST['senha']) ? $_POST['senha'] : null);
-    //echo $user->getUsuario().'<br>'.$user->getSenha().'<br>';
     if ($user->getSenha() == null || $user->getUsuario() == null) {
-        header("Location: ../view/Login.php");
-        //echo 'Usuario ou senha null';
+        echo $gui->gerarInformativo("Atenção", "Usuário e/ou senha nulos ou em branco!");
+        header("refresh: 3; ../view/Login.php");
     } else {
         $contador = testarLogin($user->getUsuario(), $user->getSenha());
         if ($contador == 1) {
             session_start();
             $_SESSION['usuario'] = $user->getUsuario();
             $_SESSION['senha'] = $user->getSenha();
-            header("Location: ../view/index.php");
-            //echo "Usuário e senha válidos";
+            echo $gui->gerarInformativo("Vamos começar", "Usuário e senha Válidos!");
+            header("refresh: 3; ../view/index.php");
         } else {
-            //echo 'testar login voltou o valor '.$contador;
-            unset($_SESSION['usuario']);
-            unset($_SESSION['senha']);
-            header("Location: ../view/Login.php");
+            echo $gui->gerarInformativo("Atenção", "Usuário ou senha inválido!");
+            header("refresh: 3; ../view/Login.php");
         }
     }
 } catch (Exception $ex) {

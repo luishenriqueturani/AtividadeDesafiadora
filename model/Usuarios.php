@@ -19,7 +19,10 @@ class Usuarios{
         $this->senha = $senha;
     }
 
-
+    function limpar(){
+        $this->senha = null;
+        $this->usuario = null;
+    }
     
     
 }
