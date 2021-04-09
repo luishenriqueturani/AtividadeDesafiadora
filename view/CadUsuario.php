@@ -44,9 +44,9 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
                             Espaço do Usuário
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Cadastrar novo Usuário</a>
+                            <a class="dropdown-item" href="CadUsuario.php">Cadastrar novo Usuário</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Sair</a>
+                            <a class="dropdown-item" href="../controler/SairUsuario.php">Sair</a>
                         </div>
                     </li>
                 </ul>
