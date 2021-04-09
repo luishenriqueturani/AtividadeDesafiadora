@@ -365,5 +365,30 @@ function testarLogin($usuario, $senha){
     }
     return $cont;
 }
+//faz o teste e cadastra o usuário
+function cadastrarUsuario($usuario, $senha){
+    $cont = 0;
+    $stmt = conectar()->prepare("SELECT * FROM usuario WHERE usuario = ?;");
+    $stmt->bindParam(1, $usuario, PDO::PARAM_STR);
+    $stmt->execute();
+    while($stmt->fetch()){
+        $cont++;
+    }
+    if($cont > 0){
+        $retorno = 'Já existem '.$cont.' usuários cadastrados com este nome!';
+    }else{
+        //$retorno = "Até aqui ta ok";
+        $stmt = conectar()->prepare("INSERT INTO usuario VALUES( ?, ?);");
+        $stmt->bindParam(1, $usuario, PDO::PARAM_STR);
+        $stmt->bindParam(2, $senha, PDO::PARAM_STR);
+        if($stmt->execute()){
+            $retorno = "Cadastrado com sucesso!";
+        }else{
+            throw new PDOException('Erro!');
+        }
+    }
+    return $retorno;
+}
+
 
 ?>

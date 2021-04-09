@@ -1,4 +1,16 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    //echo 'Ele invalidou usuário e senha';
+    //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
+    header("Location: ../view/Login.php");
+}
+
+
 require_once '../model/CRUD.php';//requisição do crud
 require_once '../model/Fornecedor.php';//requisição do fornecedor
 $fornecedor = new Fornecedor();//instância da classe fornecedor
@@ -19,7 +31,8 @@ try {
     } else {//... É chamado a função de cadastro de dados, recebendo as variáveis via get de parâmetros
         cadastrarFornecedor($fornecedor->getNome(), $fornecedor->getTelefone(), $fornecedor->getEmail(), $fornecedor->getRua(), $fornecedor->getNumEndereco(), $fornecedor->getCidade(), $fornecedor->getEstado(), $fornecedor->getCep());
         $fornecedor->limpar();//chama a função para fazer a limpeza das variáveis
-        header("Location: ../view/cadastrarFornecedor.php");//transfere o usuário para a tela de cadastro de funcionários, onde há a lista dos cadastrados
+        echo 'Cadastrado com sucesso';
+        header("refresh: 3; ../view/cadastrarFornecedor.php");//transfere o usuário para a tela de cadastro de funcionários, onde há a lista dos cadastrados
     }
 } catch (Exception $ex) {//caso dê erro, é feito um alert com a mensagem de erro
     echo '<script>alert(' . $ex . ');</script>';

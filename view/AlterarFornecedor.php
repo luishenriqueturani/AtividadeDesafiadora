@@ -40,8 +40,8 @@ $id = $_REQUEST["id"]; //atribui o cod enviado por get a uma variável, para ser
                     <li class="nav-item">
                         <a class="nav-link" href="cadastrarFornecedor.php">Cadastro de Fornecedor</a>
                     </li>
-
                 </ul>
+                
             </div>
         </nav>
         <!-- termina a navbar -->

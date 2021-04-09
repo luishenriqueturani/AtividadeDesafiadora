@@ -7,7 +7,7 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
     unset($_SESSION['senha']);
     //echo 'Ele invalidou usuário e senha';
     //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: Login.php");
+    header("Location: ../view/Login.php");
 }
 require_once '../model/CRUD.php';
 require_once '../model/Fornecedor.php';
@@ -48,7 +48,8 @@ try {
     if($forn->getCep() != null){
         alterarFornecedorCep($forn->getId(), $forn->getCep());
     }
-    header("Location: ../view/cadastrarFornecedor.php");//envia o usuário para a tela de cadastro do fornecedor
+    echo 'Operação realizada com sucesso!';
+    header("refresh: 3; ../view/cadastrarFornecedor.php");//envia o usuário para a tela de cadastro do fornecedor
 } catch (Exception $ex) {
     echo "$ex";
 }

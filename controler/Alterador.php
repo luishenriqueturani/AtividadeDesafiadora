@@ -7,7 +7,7 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
     unset($_SESSION['senha']);
     //echo 'Ele invalidou usuário e senha';
     //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: Login.php");
+    header("Location: ../view/Login.php");
 }
 require_once '../model/CRUD.php';
 require_once '../model/Produto.php';
@@ -50,9 +50,11 @@ try {
     if($prod->getCodFornecedor() != null){
         alterarFornecedor($prod->getCod(), $prod->getCodFornecedor());
     }
-    header("Location: ../view/index.php");//envia o usuário para a tela inicial
+    echo 'Operação realizada com sucesso!';
+    header("refresh: 3; ../view/index.php");;//envia o usuário para a tela inicial
     
 } catch (Exception $ex) {
     echo "Erro: $ex";                                   //essa mensagem eu estava vendo o tempo inteiro quando tentava fazer com botão para cada campo
-}                                                       //fazendo com essa montueira de ifelse não vi nenhuma vez
+    header("refresh: 3; ../view/index.php");            //fazendo com essa montueira de ifelse não vi nenhuma vez
+}   
 ?>

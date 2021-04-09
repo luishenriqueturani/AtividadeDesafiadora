@@ -7,7 +7,7 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
     unset($_SESSION['senha']);
     //echo 'Ele invalidou usuário e senha';
     //echo $_SESSION['usuario'] . '<br>' . $_SESSION['senha'];
-    header("Location: Login.php");
+    header("Location: ../view/Login.php");
 }
 require_once '../model/CRUD.php';//requisição de uso do crud
 require_once '../model/Produto.php';//requisição de uso do produto
@@ -27,7 +27,8 @@ try {//tratamento de erro
     } else {//se tudo estiver ok, chama função para cadastrar, passando por parâmetro as variáveis via get
         cadastrarProduto($prod->getCod(), $prod->getMarca(), $prod->getModelo(), $prod->getCor(), $prod->getPreco(), $prod->getCodFornecedor(), $prod->getDataFabricacao(), $prod->getDataCadastro());
         $prod->limpar();//chama a function para limpar as variáveis
-        header("Location: ../view/index.php");//manda o usuário para a tela inicial
+        echo 'Cadastrado com sucesso!';
+        header("refresh: 3; ../view/index.php");//manda o usuário para a tela inicial
     }
 } catch (PDOException $ex) {
     echo 'Erro ao canectar: ' . $ex; //informando o erro
