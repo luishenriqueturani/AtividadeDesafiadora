@@ -14,6 +14,17 @@ function selecionaFornecedor() {
     return $retorno;
 }
 
+function procuraCodProduto($cod){
+    $cont = 0;
+    $stmt = conectar()->prepare("SELECT modelo FROM produto WHERE cod = ?;");//pesquisa qualquer apenas para testar o cod, pesquisar apenas 1 campo consome menos memória do que por *
+    $stmt->bindParam(1, $cod);
+    $stmt->execute();
+    while ($stmt->fetch()){
+        $cont++;
+    }
+    return $cod;
+}
+
 function cadastrarProduto($cod, $marca, $modelo, $cor, $preco, $fornecedor, $data, $dataAtual) {
     $stmt = conectar()->prepare('INSERT INTO produto (cod,marca,modelo,cor,preco,cod_fornecedor,data_fabricacao,data_cadastro) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);');
     $stmt->bindParam(1, $cod, PDO::PARAM_INT);

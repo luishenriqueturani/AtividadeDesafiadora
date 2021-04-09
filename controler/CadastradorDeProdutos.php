@@ -25,18 +25,22 @@ try {//tratamento de erro
     $prod->setCodFornecedor(isset($_REQUEST['select-fornecedor']) ? $_REQUEST['select-fornecedor'] : null);
     $prod->setDataFabricacao(isset($_REQUEST['inputData']) ? $_REQUEST['inputData'] : null);
     $prod->setDataCadastro(date("y-m-d"));
-
-    if (empty($prod->getCod()) || empty($prod->getMarca()) || empty($prod->getModelo()) || empty($prod->getCor()) || empty($prod->getPreco()) || empty($prod->getDataFabricacao()) || empty($prod->getCodFornecedor())) {
-        echo "Por favos, preencha todos os campos!"; //se algum dos campos estiver como null, mostra mensagem para que seja tudo preenchido
-    } else {//se tudo estiver ok, chama função para cadastrar, passando por parâmetro as variáveis via get
-        cadastrarProduto($prod->getCod(), $prod->getMarca(), $prod->getModelo(), $prod->getCor(), $prod->getPreco(), $prod->getCodFornecedor(), $prod->getDataFabricacao(), $prod->getDataCadastro());
-        $prod->limpar(); //chama a function para limpar as variáveis
-        echo $gui->gerarInformativo("Cadastrado", "O produto foi cadastrado com Sucesso!"); //chama função que mostra um modal com as informações passadas por parâmetro
-        header("refresh: 3; ../view/index.php"); //manda o usuário para a tela inicial
+    if ($cont = procuraCodProduto($prod->getCod()) > 1) {
+        echo $gui->gerarInformativo("Atenção!", "Já existem $cont registros com esse código!");
+        header("refresh: 3; ../view/cadastrarProd.php");
+    } else {
+        if (empty($prod->getCod()) || empty($prod->getMarca()) || empty($prod->getModelo()) || empty($prod->getCor()) || empty($prod->getPreco()) || empty($prod->getDataFabricacao()) || empty($prod->getCodFornecedor())) {
+            echo "Por favos, preencha todos os campos!"; //se algum dos campos estiver como null, mostra mensagem para que seja tudo preenchido
+        } else {//se tudo estiver ok, chama função para cadastrar, passando por parâmetro as variáveis via get
+            cadastrarProduto($prod->getCod(), $prod->getMarca(), $prod->getModelo(), $prod->getCor(), $prod->getPreco(), $prod->getCodFornecedor(), $prod->getDataFabricacao(), $prod->getDataCadastro());
+            $prod->limpar(); //chama a function para limpar as variáveis
+            echo $gui->gerarInformativo("Cadastrado", "O produto foi cadastrado com Sucesso!"); //chama função que mostra um modal com as informações passadas por parâmetro
+            header("refresh: 3; ../view/index.php"); //manda o usuário para a tela inicial
+        }
     }
 } catch (PDOException $ex) {
     echo $gui->gerarInformativo("Erro! :( ", "$ex");    //a função agora é usada para mostrar o conteúdo do erro
-    //header("refresh: 3; ../view/index.php");            //após 3 segundos é transferido para a tela inicial
+    header("refresh: 3; ../view/index.php");            //após 3 segundos é transferido para a tela inicial
 }
 
 

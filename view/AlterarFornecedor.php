@@ -3,11 +3,11 @@
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+require_once './GUI.php'; //chamado do gui
+$gui = new GUI(); //instância do objeto de gui
 if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
-    require_once './GUI.php'; //chamado do gui
-    $gui = new GUI(); //instância do objeto de gui
     echo $gui->gerarInformativo("Atenção", "Seu tempo de seção espirou ou não foi feito Login!"); //gera um modal informando a situação
     header("refresh: 3; ../view/Login.php"); //após aguardar 3 segundos transfere para a tela de login
 }
