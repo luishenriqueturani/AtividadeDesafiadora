@@ -25,8 +25,9 @@ try {//tratamento de erro
     $prod->setCodFornecedor(isset($_REQUEST['select-fornecedor']) ? $_REQUEST['select-fornecedor'] : null);
     $prod->setDataFabricacao(isset($_REQUEST['inputData']) ? $_REQUEST['inputData'] : null);
     $prod->setDataCadastro(date("y-m-d"));
-    if ($cont = procuraCodProduto($prod->getCod()) > 1) {
-        echo $gui->gerarInformativo("Atenção!", "Já existem $cont registros com esse código!");
+    if (procuraCodProduto($prod->getCod()) > 0) {
+        $cont = procuraCodProduto($prod->getCod());
+        echo $gui->gerarInformativo("Atenção!", "Já existe(m) $cont registro(s) com esse código!");
         header("refresh: 3; ../view/cadastrarProd.php");
     } else {
         if (empty($prod->getCod()) || empty($prod->getMarca()) || empty($prod->getModelo()) || empty($prod->getCor()) || empty($prod->getPreco()) || empty($prod->getDataFabricacao()) || empty($prod->getCodFornecedor())) {

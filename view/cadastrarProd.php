@@ -88,7 +88,7 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
                     <!-- Input do preço -->
                     <div class="form-group col-md-6">
                         <label for="inputPreco">Preço<span>*</span></label>
-                        <input type="number" class="form-control" id="inputPreco" name="inputPreco" placeholder="Preco..." required="" min="0" max="999999999999">
+                        <input type="number" class="form-control" id="inputPreco" name="inputPreco" placeholder="Preço..." required="" min="0" max="999999999999">
                     </div>
                     <!-- input da data de fabricação -->
                     <div class="form-group col-md-6">
